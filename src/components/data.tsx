@@ -64,6 +64,7 @@ const sections = [
 const mainFeaturedPost: Blog.FeaturedPost = {
   key: "main-featured-post",
   title: 'Title of a longer featured blog post',
+  post: "",
   description:
     "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
   image: {
@@ -76,6 +77,7 @@ const mainFeaturedPost: Blog.FeaturedPost = {
 const featuredPosts: Blog.FeaturedPost[] = [
   {
     key: "some_featured_post",
+    post: "",
     title: 'Featured post',
     dateCreated: new Date().toJSON(),
     description:
@@ -87,6 +89,7 @@ const featuredPosts: Blog.FeaturedPost[] = [
   },
   {
     key: "another_featured_post",
+    post: "",
     title: 'Post title',
     dateCreated: 'Nov 11',
     description:
