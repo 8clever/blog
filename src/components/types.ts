@@ -1,9 +1,9 @@
 
 export namespace Blog {
 
-  export interface Image {
-    url: string;
-    label: string;
+  export class Image {
+    url: string = "";
+    label: string = "";
   }
 
   export class FeaturedPost {
@@ -11,10 +11,7 @@ export namespace Blog {
     description: string = "";
     key: string = '';
     dateCreated: string = new Date().toJSON()
-    image: Image = {
-      url: "",
-      label: ""
-    }
+    image: Image = new Image();
 
     public static GetPostUrl = (post: FeaturedPost) => {
       return `/post/${post.key}`
