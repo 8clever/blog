@@ -1,4 +1,5 @@
 import { GitHub as GitHubIcon, Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
+import { Blog } from "./types";
 
 const post1 = `# Sample blog post
 
@@ -60,31 +61,40 @@ const sections = [
   { title: 'Travel', url: '#' },
 ];
 
-const mainFeaturedPost = {
+const mainFeaturedPost: Blog.FeaturedPost = {
+  key: "main-featured-post",
   title: 'Title of a longer featured blog post',
   description:
     "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random',
-  imageText: 'main image description',
-  linkText: 'Continue reading…',
+  image: {
+    url: "https://source.unsplash.com/random",
+    label: "main image description"
+  },
+  dateCreated: new Date().toJSON()
 };
 
-const featuredPosts = [
+const featuredPosts: Blog.FeaturedPost[] = [
   {
+    key: "some_featured_post",
     title: 'Featured post',
-    date: 'Nov 12',
+    dateCreated: new Date().toJSON(),
     description:
       'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageLabel: 'Image Text',
+    image: {
+      url: "https://source.unsplash.com/random",
+      label: "Image Text"
+    }
   },
   {
+    key: "another_featured_post",
     title: 'Post title',
-    date: 'Nov 11',
+    dateCreated: 'Nov 11',
     description:
       'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageLabel: 'Image Text',
+    image: {
+      url: "https://source.unsplash.com/random",
+      label: "Image Text"
+    }
   },
 ];
 

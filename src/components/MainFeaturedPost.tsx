@@ -1,14 +1,9 @@
 import * as React from 'react';
 import { Paper, Typography, Grid, Link, Box } from "@mui/material";
+import { Blog } from './types';
 
 interface MainFeaturedPostProps {
-  post: {
-    description: string;
-    image: string;
-    imageText: string;
-    linkText: string;
-    title: string;
-  };
+  post: Blog.FeaturedPost;
 }
 
 export default function MainFeaturedPost(props: MainFeaturedPostProps) {
@@ -24,11 +19,11 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundImage: `url(${post.image})`,
+        backgroundImage: `url(${post.image.url})`,
       }}
     >
       {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+      {<img style={{ display: 'none' }} src={post.image.url} alt={post.image.label} />}
       <Box
         sx={{
           position: 'absolute',
@@ -54,8 +49,8 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
             <Typography variant="h5" color="inherit" paragraph>
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href="#">
-              {post.linkText}
+            <Link variant="subtitle1" href={Blog.FeaturedPost.GetPostUrl(post)}>
+              Continue reading...
             </Link>
           </Box>
         </Grid>
