@@ -13,7 +13,7 @@ const Admin = () => {
     <Layout>
       {adminUrls.map(a => {
         return (
-          <Card variant="elevation" elevation={3} sx={{ 
+          <Card key={a.url} variant="elevation" elevation={3} sx={{ 
             display: "flex", 
             justifyContent: "space-between",
             mb: 1

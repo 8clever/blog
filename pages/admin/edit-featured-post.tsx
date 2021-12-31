@@ -1,4 +1,4 @@
-import { Box, Container, Stack, TextField, Typography } from "@mui/material"
+import { Box, Button, Container, Stack, TextField, Typography } from "@mui/material"
 import React from "react"
 import { Layout } from "../../src/components/Layout"
 import { Blog } from "../../src/components/types"
@@ -14,6 +14,18 @@ const EditFeaturedPost = () => {
           <Typography variant="h4">
             Edit featured post
           </Typography>
+          <Box sx={{ textAlign: "right" }}>
+            <Button 
+              onClick={() => {
+                Blog.FeaturedPost.Save(post);
+              }}
+              color="primary">
+              Save
+            </Button>
+            <Button color="secondary" href="/admin/">
+              Cancel
+            </Button>
+          </Box>
           <TextField 
             required
             fullWidth

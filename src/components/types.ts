@@ -15,5 +15,14 @@ export namespace Blog {
     public static GetPostUrl = (post: FeaturedPost) => {
       return `/post/${post.key}`
     }
+
+    public static Save = async (post: FeaturedPost) => {
+      const res = await fetch("/api/featured-post/edit", {
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify(post)
+      });
+      return res.json();
+    }
   }
 }
