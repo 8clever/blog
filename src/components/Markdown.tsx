@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ReactMarkdown from 'markdown-to-jsx';
+import ReactMarkdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import { Typography, Link, Box } from "@mui/material";
 
 function MarkdownListItem(props: any) {
@@ -43,6 +43,12 @@ const options = {
   },
 };
 
-export default function Markdown(props: any) {
+interface MarkdownProps {
+  children: string;
+  options?: MarkdownToJSX.Options
+  className?: string;
+}
+
+export default function Markdown(props: MarkdownProps) {
   return <ReactMarkdown options={options} {...props} />;
 }
