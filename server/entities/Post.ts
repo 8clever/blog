@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import { Column, Entity, CreateDateColumn, UpdateDateColumn, ObjectIdColumn } from 'typeorm';
+import { Column, Entity, CreateDateColumn, UpdateDateColumn, ObjectIdColumn, OneToOne } from 'typeorm';
 import { Blog } from '../../src/components/types';
 import { ImageEntity } from './Image';
 
@@ -10,25 +10,25 @@ export class PostEntity implements Blog.Post {
   id: ObjectId = new ObjectId();
 
   @Column()
-  key = "";
+  key: string = "";
 
   @Column()
-  title = ""
+  title: string = ""
   
   @Column()
-  description = "";
+  description: string = "";
   
   @Column()
-  post = "";
+  post: string = "";
   
   @Column("date")
   @CreateDateColumn()
-  dateCreated = "";
+  dateCreated: string = "";
 
   @Column("date")
   @UpdateDateColumn()
-  dateUpdated = ""
+  dateUpdated: string = ""
   
-  @Column(type => ImageEntity)
+  @OneToOne(() => ImageEntity)
   image: ImageEntity = new ImageEntity()
 }

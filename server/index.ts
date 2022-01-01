@@ -6,13 +6,19 @@ import { rootConfig } from "../rootConfig"
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
-const handle = app.getRequestHandler()
+const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
-  createServer((req, res) => {
+async function bootstrap () {
+  await app.prepare();
+
+  const server = createServer((req, res) => {
     const parsedUrl = parse(req.url || "", true)
     handle(req, res, parsedUrl)
-  }).listen(rootConfig.PORT, () => {
+  });
+
+  server.listen(rootConfig.PORT, () => {
     console.log('> Ready on http://localhost:3000')
   });
-})
+}
+
+bootstrap();
