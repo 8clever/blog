@@ -3,7 +3,7 @@ import { Paper, Typography, Grid, Link, Box } from "@mui/material";
 import { Blog } from './types';
 
 interface MainFeaturedPostProps {
-  post: Blog.FeaturedPost;
+  post: Blog.Post;
 }
 
 export default function MainFeaturedPost(props: MainFeaturedPostProps) {
@@ -49,7 +49,7 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
             <Typography variant="h5" color="inherit" paragraph>
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href={Blog.FeaturedPost.GetPostUrl(post)}>
+            <Link variant="subtitle1" href={Blog.Post.GetPostUrl(post)}>
               Continue reading...
             </Link>
           </Box>

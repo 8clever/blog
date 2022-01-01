@@ -5,7 +5,7 @@ import { Blog } from "../../src/components/types"
 
 const EditFeaturedPost = () => {
 
-  const [ post, setPost ] = React.useState<Blog.FeaturedPost>(new Blog.FeaturedPost())
+  const [ post, setPost ] = React.useState<Blog.Post>(new Blog.Post())
 
   return (
     <Layout>
@@ -17,7 +17,7 @@ const EditFeaturedPost = () => {
           <Box sx={{ textAlign: "right" }}>
             <Button 
               onClick={() => {
-                Blog.FeaturedPost.Save(post);
+                Blog.Post.Save(post);
               }}
               color="primary">
               Save

@@ -61,7 +61,7 @@ const sections = [
   { title: 'Travel', url: '#' },
 ];
 
-const mainFeaturedPost: Blog.FeaturedPost = {
+const mainFeaturedPost: Blog.Post = {
   key: "main-featured-post",
   title: 'Title of a longer featured blog post',
   post: "",
@@ -74,7 +74,7 @@ const mainFeaturedPost: Blog.FeaturedPost = {
   dateCreated: new Date().toJSON()
 };
 
-const featuredPosts: Blog.FeaturedPost[] = [
+const featuredPosts: Blog.Post[] = [
   {
     key: "some_featured_post",
     post: "",

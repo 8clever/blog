@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  mongo:
+    image: bitnami/mongodb:latest
+    volumes:
+      - ./compose/mongo:/bitnami/mongodb
+    ports:
+      - 27017:27017

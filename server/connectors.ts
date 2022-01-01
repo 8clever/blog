@@ -1,13 +1,15 @@
 import { createConnection, getConnection } from "typeorm";
 import { rootConfig } from "../rootConfig";
-import { Blog } from "../src/components/types";
+import { ImageEntity } from "./entities/Image";
+import { PostEntity } from "./entities/Post";
 
 createConnection({
   type: "mongodb",
   url: rootConfig.MONGODB_URL,
   database: "blog",
   entities: [
-    Blog.FeaturedPost
+    PostEntity,
+    ImageEntity
   ],
   synchronize: true,
   logging: false
