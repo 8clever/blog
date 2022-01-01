@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { dataBase } from "../../../server/connectors"
+import { DataBase } from "../../../server/connectors"
 import { PostEntity } from "../../../server/entities/Post"
 import { Blog } from "../../../src/components/types"
 
@@ -9,9 +9,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return
   }
 
-  await dataBase.init();
+  const db = new DataBase();
+  await db.init();
+
   const post: Blog.Post = JSON.parse(req.body)
-  const repo = dataBase.getRepo(PostEntity);
+
+  const repo = db.getRepo<PostEntity>(PostEntity.COLLECTION_NAME)
+
   await repo.save(post);
 
   res.json({ message: "SUCCESS" });
