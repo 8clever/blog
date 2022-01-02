@@ -4,6 +4,7 @@ import { Blog } from './types';
 
 interface MainFeaturedPostProps {
   post: Blog.Post;
+  withLink?: boolean;
 }
 
 export default function MainFeaturedPost(props: MainFeaturedPostProps) {
@@ -49,9 +50,12 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
             <Typography variant="h5" color="inherit" paragraph>
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href={Blog.Post.GetPostUrl(post)}>
-              Continue reading...
-            </Link>
+            {
+              props.withLink &&
+              <Link variant="subtitle1" href={Blog.Post.GetPostUrl(post)}>
+                Continue reading...
+              </Link>
+            }
           </Box>
         </Grid>
       </Grid>
