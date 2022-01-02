@@ -1,3 +1,4 @@
+import { wrap } from '@mikro-orm/core'
 import { Grid } from '@mui/material'
 import type { GetServerSideProps, NextPage } from 'next'
 import { DataBase, Post } from '../server/connectors'
@@ -20,9 +21,14 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   const db = new DataBase();
   await db.init();
   const postsRepo = db.getRepo<Post>(Post);
-  const posts = await postsRepo.find({
-    
-  });
+  
+  const posts = (await postsRepo.find({}, {
+    orderBy: {
+      dateUpdated: "ASC_NULLS_LAST",
+      dateCreated: "ASC"
+    },
+    limit: 5
+  })).map(p => wrap(p).toJSON() as Post);
 
   return {
     props: {

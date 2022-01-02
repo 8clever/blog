@@ -1,5 +1,5 @@
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
-import { OneToOne } from 'typeorm';
+import { ObjectId } from '@mikro-orm/mongodb';
 import { Blog } from '../../src/components/types';
 import { Image } from './Image';
 
@@ -7,6 +7,9 @@ import { Image } from './Image';
 export class Post implements Blog.Post {
 
   @PrimaryKey()
+  _id!: ObjectId;
+
+  @Property({ unique: true })
   key!: string;
 
   @Property()
@@ -18,12 +21,18 @@ export class Post implements Blog.Post {
   @Property()
   post!: string;
   
-  @Property({ onCreate: () => new Date() })
+  @Property({ 
+    onCreate: () => new Date(),
+    serializer: (value: Date) => value?.toJSON()
+  })
   dateCreated!: string;
 
-  @Property({ onUpdate: () => new Date() })
+  @Property({ 
+    onUpdate: () => new Date(),
+    serializer: (value: Date) => value?.toJSON()
+  })
   dateUpdated!: string
   
-  @OneToOne(() => Image)
+  @Property()
   image!: Image
 }
