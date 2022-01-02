@@ -1,10 +1,16 @@
-import { Column } from "typeorm";
+import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
+import { ObjectId } from "@mikro-orm/mongodb";
 import { Blog } from "../../src/components/types";
 
-export class ImageEntity implements Blog.Image {
-  @Column()
-  label: string = "";
+@Entity()
+export class Image implements Blog.Image {
+
+  @PrimaryKey()
+  _id!: ObjectId;
+
+  @Property()
+  label!: string;
   
-  @Column()
-  url: string = "";
+  @Property()
+  url!: string;
 }

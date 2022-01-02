@@ -1,38 +1,29 @@
-import { ObjectId } from 'mongodb';
-import { Column, Entity, CreateDateColumn, UpdateDateColumn, ObjectIdColumn, OneToOne, PrimaryColumn } from 'typeorm';
+import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { OneToOne } from 'typeorm';
 import { Blog } from '../../src/components/types';
-import { ImageEntity } from './Image';
+import { Image } from './Image';
 
-const COLLECTION_NAME = "posts";
+@Entity()
+export class Post implements Blog.Post {
 
-@Entity(COLLECTION_NAME)
-export class PostEntity implements Blog.Post {
+  @PrimaryKey()
+  key!: string;
 
-  public static COLLECTION_NAME = COLLECTION_NAME;
-
-  @ObjectIdColumn()
-  id: ObjectId = new ObjectId();
-
-  @Column({ primary: true })
-  key: string = "";
-
-  @Column()
-  title: string = ""
+  @Property()
+  title!: string
   
-  @Column()
-  description: string = "";
+  @Property()
+  description!: string;
   
-  @Column()
-  post: string = "";
+  @Property()
+  post!: string;
   
-  @Column("date")
-  @CreateDateColumn()
-  dateCreated: string = "";
+  @Property({ onCreate: () => new Date() })
+  dateCreated!: string;
 
-  @Column("date")
-  @UpdateDateColumn()
-  dateUpdated: string = ""
+  @Property({ onUpdate: () => new Date() })
+  dateUpdated!: string
   
-  @Column(() => ImageEntity)
-  image: ImageEntity = new ImageEntity()
+  @OneToOne(() => Image)
+  image!: Image
 }

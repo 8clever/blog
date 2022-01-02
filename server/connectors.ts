@@ -1,33 +1,41 @@
-import { Connection, createConnection, EntityTarget, getConnection } from "typeorm";
+import { MikroORM, EntityName, EntityManager, RequestContext } from "@mikro-orm/core";
 import { rootConfig } from "../rootConfig";
-import { ImageEntity } from "./entities/Image";
-import { PostEntity } from "./entities/Post";
-export class DataBase {
+import { Image } from "./entities/Image";
+import { Post } from "./entities/Post";
+class DataBase {
 
-  connection?: Connection;
+  em!: EntityManager;
 
   init = async () => {
-    if (this.connection) return;
+    if (this.em) return;
 
-    try {
-      this.connection = getConnection();
+    const em = RequestContext.getEntityManager();
+    if (em) {
+      this.em = em;
       return;
-    } catch {}
+    }
 
-    this.connection = await createConnection({
-      type: "mongodb",
-      url: rootConfig.MONGODB_URL,
-      database: "blog",
-      logging: true,
-      synchronize: true,
+    const orm = await MikroORM.init({
+      type: "mongo",
+      clientUrl: rootConfig.MONGODB_URL,
+      dbName: "blog",
       entities: [
-        PostEntity,
-        ImageEntity
+        Post,
+        Image
       ]
     });
+
+    this.em = orm.em;
   }
 
-  getRepo<Entity> (target: EntityTarget<Entity>) {
-    return this.connection!.getRepository(target);
+  getRepo<Entity> (target: EntityName<Entity>) {
+    return this.em.getRepository(target);
   }
+}
+
+export {
+  DataBase,
+
+  Image,
+  Post
 }

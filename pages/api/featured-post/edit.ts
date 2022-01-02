@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { DataBase } from "../../../server/connectors"
-import { PostEntity } from "../../../server/entities/Post"
-import { Blog } from "../../../src/components/types"
+import { DataBase, Post, Image } from "../../../server/connectors"
+import { Blog } from "../../../src/components/types";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -12,11 +11,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const db = new DataBase();
   await db.init();
 
-  const post: Blog.Post = JSON.parse(req.body)
+  const dto: Blog.Post = JSON.parse(req.body);
+  const post = new Post();
+  Object.assign(post, dto);
 
-  const repo = db.getRepo<PostEntity>(PostEntity.COLLECTION_NAME)
+  post.image = new Image();
+  Object.assign(post.image, dto.image);
 
-  await repo.save(post);
+  const repo = db.getRepo<Post>(Post)
+
+  await repo.persistAndFlush(post);
 
   res.json({ message: "SUCCESS" });
 }
