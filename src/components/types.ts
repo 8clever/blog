@@ -13,8 +13,8 @@ export namespace Blog {
     post: string = "### Test post";
     image: Image = new Image();
     
-    dateCreated?: string;
-    dateUpdated?: string;
+    dateCreated?: number;
+    dateUpdated?: number;
   
     public static GetPostUrl = (post: Post) => {
       return `/post/${post.key}`

@@ -1,11 +1,47 @@
+import { wrap } from "@mikro-orm/core"
 import { Box, Button, Container, Stack, TextField, Typography } from "@mui/material"
+import { GetServerSideProps, NextPage } from "next"
+import { ParsedUrlQuery } from "querystring"
 import React from "react"
+import { DataBase, Post } from "../../server/connectors"
 import { Layout } from "../../src/components/Layout"
 import { Blog } from "../../src/components/types"
 
-const EditFeaturedPost = () => {
+interface PageProps {
+  post?: Post
+}
 
-  const [ post, setPost ] = React.useState<Blog.Post>(new Blog.Post())
+interface PageParams extends ParsedUrlQuery {
+  key?: string;
+}
+
+export const getServerSideProps: GetServerSideProps<PageProps, PageParams> = async (props) => {
+
+  if (props.query.key) {
+    const db = new DataBase();
+    await db.init();
+    const repo = db.getRepo(Post);
+    const post = await repo.findOne({ key: props.query.key });
+
+    if (post) {
+      return {
+        props: {
+          post: wrap(post).toJSON() as Post
+        }
+      }
+    }
+  }
+
+  return {
+    props: {
+
+    }
+  }
+}
+
+const EditFeaturedPost: NextPage<PageProps> = (props) => {
+
+  const [ post, setPost ] = React.useState<Blog.Post>(props.post || new Blog.Post())
 
   return (
     <Layout>

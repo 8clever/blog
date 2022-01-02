@@ -1,4 +1,4 @@
-import { Entity, PrimaryKey, Property, Unique } from '@mikro-orm/core';
+import { DateType, Entity, PrimaryKey, Property, Unique } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
 import { Blog } from '../../src/components/types';
 import { Image } from './Image';
@@ -23,16 +23,14 @@ export class Post implements Blog.Post {
   post!: string;
   
   @Property({ 
-    onCreate: () => new Date(),
-    serializer: (value: Date) => value?.toJSON()
+    onCreate: () => new Date().valueOf()
   })
-  dateCreated!: string;
+  dateCreated!: number;
 
   @Property({ 
-    onUpdate: () => new Date(),
-    serializer: (value: Date) => value?.toJSON()
+    onUpdate: () => new Date().valueOf(),
   })
-  dateUpdated!: string
+  dateUpdated!: number
   
   @Property()
   image!: Image
