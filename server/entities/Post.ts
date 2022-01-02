@@ -1,4 +1,4 @@
-import { DateType, Entity, PrimaryKey, Property, Unique } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property, Unique } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
 import { Blog } from '../../src/components/types';
 import { Image } from './Image';
