@@ -2,7 +2,7 @@ import { wrap } from "@mikro-orm/core";
 import { NextApiRequest, NextApiResponse } from "next"
 import { DataBase, Post } from "../../../server/connectors"
 import { Blog } from "../../../src/components/types";
-import { ResponseError, ResponseSuccess } from "../../../src/api"
+import type { ResponseError, ResponseSuccess } from "../../../src/api"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
