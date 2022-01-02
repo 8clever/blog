@@ -1,3 +1,5 @@
+import { Api } from "../api";
+
 export namespace Blog {
   export class Image {
     url: string = "https://source.unsplash.com/random";
@@ -19,12 +21,8 @@ export namespace Blog {
     }
 
     public static Save = async (post: Post) => {
-      const res = await fetch("/api/featured-post/edit", {
-        method: "POST",
-        credentials: "same-origin",
-        body: JSON.stringify(post)
-      });
-      return res.json();
+      const api = new Api("/api/featured-post/edit");
+      await api.post(post);
     }
   }
 }

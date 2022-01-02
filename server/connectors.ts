@@ -16,6 +16,8 @@ class DataBase {
     }
 
     const orm = await MikroORM.init({
+      validate: true,
+      ensureIndexes: true,
       type: "mongo",
       clientUrl: rootConfig.MONGODB_URL,
       dbName: "blog",
