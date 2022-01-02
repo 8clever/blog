@@ -6,3 +6,10 @@ services:
       - ./compose/mongo:/bitnami/mongodb
     ports:
       - 27017:27017
+  web:
+    image: 8clever/blog
+    build: .
+    environment:
+      - MONGODB_URL=mongodb://mongo:27017
+    ports:
+      - 3000:3000
