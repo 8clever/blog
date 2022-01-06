@@ -16,7 +16,7 @@ async function bootstrap () {
   });
 
   server.listen(rootConfig.PORT, () => {
-    console.log('> Ready on http://localhost:3000')
+    console.log('> Ready on http://localhost:' + rootConfig.PORT)
   });
 }
 
