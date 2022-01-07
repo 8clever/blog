@@ -6,7 +6,8 @@ import { rootConfig } from "../../rootConfig"
 export const secureMiddleware = async (req: NextApiRequest) => {
   const session = await getToken({
     req,
-    secret: rootConfig.SECRET
+    secret: rootConfig.SECRET,
+    secureCookie: rootConfig.NEXTAUTH_URL?.startsWith("https://")
   })
   if (!session) return NextResponse.redirect("/signin")
 }
