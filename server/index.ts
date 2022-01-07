@@ -2,7 +2,6 @@ import { createServer } from "http"
 import next from "next"
 import { parse } from "url"
 import { rootConfig } from "../rootConfig"
-import { DataBase } from "./connectors"
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
