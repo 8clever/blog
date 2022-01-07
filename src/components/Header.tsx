@@ -3,10 +3,6 @@ import { Toolbar, Button, IconButton, Typography, Link } from "@mui/material"
 import { Search as SearchIcon } from '@mui/icons-material';
 import { signIn, signOut, useSession } from "next-auth/react";
 interface HeaderProps {
-  sections: ReadonlyArray<{
-    title: string;
-    url: string;
-  }>;
   title: string;
 }
 

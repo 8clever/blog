@@ -23,7 +23,7 @@ export function Layout(props: LayoutProps) {
   return (
     <Theme>
       <Container maxWidth="lg">
-        <Header title="News" sections={data.sections} />
+        <Header title="News" />
         <main>
           {props.children}
         </main>
