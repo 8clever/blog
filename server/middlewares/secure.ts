@@ -9,5 +9,7 @@ export const secureMiddleware = async (req: NextApiRequest) => {
     secret: rootConfig.SECRET,
     secureCookie: process.env.NODE_ENV === "production"
   });
+  console.log(rootConfig);
+  console.log(session);
   if (!session) return NextResponse.redirect("/signin")
 }
