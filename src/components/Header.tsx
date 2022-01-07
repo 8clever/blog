@@ -10,10 +10,27 @@ interface HeaderProps {
   title: string;
 }
 
-export default function Header(props: HeaderProps) {
-  const { sections, title } = props;
+const rootSections = [
+  { title: 'Home', url: '/' },
+];
 
-  const { data: session, status } = useSession();
+export default function Header(props: HeaderProps) {
+  const { title } = props;
+
+  const { status } = useSession();
+
+  const sections = React.useMemo(() => {
+    if (status === "authenticated") {
+      return [
+        ...rootSections,
+        {
+          title: "Admin",
+          url: "/admin"
+        }
+      ]
+    }
+    return rootSections;
+  }, [ status ]);
 
   return (
     <React.Fragment>
@@ -54,7 +71,7 @@ export default function Header(props: HeaderProps) {
       <Toolbar
         component="nav"
         variant="dense"
-        sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
+        sx={{ overflowX: 'auto' }}
       >
         {sections.map((section) => (
           <Link

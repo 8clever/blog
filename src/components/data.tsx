@@ -1,9 +1,5 @@
 import { GitHub as GitHubIcon, Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
 
-const sections = [
-  { title: 'Home', url: '/' },
-];
-
 const sidebar = {
   title: 'About',
   description:
@@ -16,6 +12,5 @@ const sidebar = {
 };
 
 export const data = {
-  sidebar,
-  sections
+  sidebar
 }
