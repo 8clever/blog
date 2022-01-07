@@ -7,7 +7,7 @@ export const secureMiddleware = async (req: NextApiRequest) => {
   const session = await getToken({
     req,
     secret: rootConfig.SECRET,
-    secureCookie: rootConfig.NEXTAUTH_URL?.startsWith("https://")
-  })
+    secureCookie: process.env.NODE_ENV === "production"
+  });
   if (!session) return NextResponse.redirect("/signin")
 }
