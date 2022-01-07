@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Toolbar, Button, IconButton, Typography, Link } from "@mui/material"
-import { Search as SearchIcon } from '@mui/icons-material'
-
+import { Search as SearchIcon } from '@mui/icons-material';
+import { signIn, signOut, useSession } from "next-auth/react";
 interface HeaderProps {
   sections: ReadonlyArray<{
     title: string;
@@ -12,6 +12,8 @@ interface HeaderProps {
 
 export default function Header(props: HeaderProps) {
   const { sections, title } = props;
+
+  const { data: session, status } = useSession();
 
   return (
     <React.Fragment>
@@ -29,15 +31,25 @@ export default function Header(props: HeaderProps) {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Button 
-          onClick={() => {
-            const returnUrl = window.location.href;
-            window.location.href = "/signin?returnUrl=" + returnUrl;
-          }}
-          variant="outlined" 
-          size="small">
-          Sign in
-        </Button>
+        {
+          status === "authenticated" ?
+          <Button 
+            onClick={() => {
+              signOut();
+            }}
+            variant="outlined" 
+            size="small">
+            Sign out
+          </Button> :
+          <Button 
+            onClick={() => {
+              signIn();
+            }}
+            variant="outlined" 
+            size="small">
+            Sign in
+          </Button>
+        }
       </Toolbar>
       <Toolbar
         component="nav"

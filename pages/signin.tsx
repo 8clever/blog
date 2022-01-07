@@ -1,13 +1,25 @@
 import * as React from 'react';
-import { Avatar, Button, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container, ThemeProvider } from "@mui/material"
+import { Avatar, Button, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container, ThemeProvider, Alert } from "@mui/material"
 import { LockOutlined as LockOutlinedIcon } from "@mui/icons-material"
 import { Theme } from '../src/components/Layout';
 import Footer from '../src/components/Footer';
-import { User } from '../src/components/types';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
+import { getCsrfToken } from "next-auth/react"
 import { useRouter } from 'next/router';
 
-const SignIn: NextPage = function SignIn () {
+export const getServerSideProps: GetServerSideProps<NextProps> =  async (context) => {
+  return {
+    props: {
+      csrfToken: await getCsrfToken(context),
+    },
+  }
+}
+
+interface NextProps {
+  csrfToken?: string
+}
+
+const SignIn: NextPage<NextProps> = function SignIn (props) {
 
   const router = useRouter();
 
@@ -28,25 +40,26 @@ const SignIn: NextPage = function SignIn () {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          {
+            router.query.error &&
+            <Alert severity='error' sx={{ width: "100%", mt: 1 }}>
+              Login or password is not correct
+            </Alert>
+          }
           <Box 
+            method="post"
+            action="/api/auth/callback/credentials"
             component="form" 
-            onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
-              e.preventDefault();
-              const data = new FormData(e.currentTarget);
-              const auth = new User.Auth();
-              auth.login = data.get("login") as string;
-              auth.password = data.get("password") as string;
-              await User.Auth.Login(auth);
-              window.location.href = router.query.returnUrl as string || "/";
-            }} 
-            noValidate sx={{ mt: 1 }}>
+            noValidate 
+            sx={{ mt: 1 }}>
+            <input name="csrfToken" type="hidden" defaultValue={props.csrfToken} />
             <TextField
               margin="normal"
               required
               fullWidth
-              label="Email Address"
-              name="login"
-              autoComplete="login"
+              label="Login"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField

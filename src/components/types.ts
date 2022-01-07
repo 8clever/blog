@@ -31,12 +31,7 @@ export namespace User {
 
   export class Auth {
     login: string = ""
-    password?: string
-
-    public static Login = async (auth: Auth) => {
-      const api = new Api("/api/public/login");
-      await api.post(auth);
-    }
+    password?: string;
   }
 
 }
