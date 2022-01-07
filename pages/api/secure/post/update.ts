@@ -1,8 +1,8 @@
 import { wrap } from "@mikro-orm/core";
 import { NextApiRequest, NextApiResponse } from "next"
-import { DataBase, Post } from "../../../server/connectors"
-import { Blog } from "../../../src/components/types";
-import type { ResponseError, ResponseSuccess } from "../../../src/api"
+import { DataBase, Post } from "../../../../server/connectors"
+import { Blog } from "../../../../src/components/types";
+import type { ResponseError, ResponseSuccess } from "../../../../src/api"
 import { ObjectId } from "@mikro-orm/mongodb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

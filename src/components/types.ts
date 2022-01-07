@@ -21,8 +21,22 @@ export namespace Blog {
     }
 
     public static Save = async (post: Post) => {
-      const api = new Api("/api/featured-post/edit");
+      const api = new Api("/api/secure/post/update");
       await api.post(post);
     }
   }
+}
+
+export namespace User {
+
+  export class Auth {
+    login: string = ""
+    password?: string
+
+    public static Login = async (auth: Auth) => {
+      const api = new Api("/api/public/login");
+      await api.post(auth);
+    }
+  }
+
 }

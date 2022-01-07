@@ -4,7 +4,7 @@ import { Layout } from "../../src/components/Layout";
 const adminUrls = [
   {
     title: "Edit featured posts",
-    url: "/admin/edit-featured-post"
+    url: "/admin/edit-post"
   }
 ]
 

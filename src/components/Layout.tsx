@@ -6,16 +6,24 @@ import { data } from "./data";
 
 const theme = createTheme();
 
+export const Theme: React.FC = (props) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {props.children}
+    </ThemeProvider>
+  )
+}
+
 interface LayoutProps {
   children?: React.ReactNode;
 }
 
 export function Layout(props: LayoutProps) {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <Theme>
       <Container maxWidth="lg">
-        <Header title="Blog" sections={data.sections} />
+        <Header title="News" sections={data.sections} />
         <main>
           {props.children}
         </main>
@@ -24,6 +32,6 @@ export function Layout(props: LayoutProps) {
         title="Footer"
         description="Something here to give the footer a purpose!"
       />
-    </ThemeProvider>
+    </Theme>
   );
 }
