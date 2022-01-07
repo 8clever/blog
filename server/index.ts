@@ -9,13 +9,8 @@ const app = next({ dev })
 const handle = app.getRequestHandler();
 
 async function bootstrap () {
-  const db = new DataBase();
-
-  await Promise.all([
-    db.init(),
-    app.prepare()
-  ]);
-
+  await app.prepare();
+  
   const server = createServer((req, res) => {
     const parsedUrl = parse(req.url || "", true)
     handle(req, res, parsedUrl)
