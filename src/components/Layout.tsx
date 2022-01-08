@@ -23,12 +23,14 @@ export function Layout(props: LayoutProps) {
   return (
     <Theme>
       <Stack justifyContent={"space-between"} sx={{ height: "100vh" }}>
-        <Container maxWidth="lg">
+        <Box>
           <Header title="News" />
-          <main>
-            {props.children}
-          </main>
-        </Container>
+          <Container maxWidth="lg">
+            <main>
+              {props.children}
+            </main>
+          </Container>
+        </Box>
         <Box sx={{ background: blue[50] }}>
           <Footer />
         </Box>

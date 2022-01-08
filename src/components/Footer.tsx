@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Container, Typography, Link, Stack } from "@mui/material"
+import { Box, Container, Typography, Link, Stack, Fab } from "@mui/material"
 import { GitHub as GitHubIcon, Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
 
 export function Copyright() {
@@ -31,24 +31,22 @@ interface FooterProps {
 export default function Footer(props: FooterProps) {
   return (
     <Box component="footer">
-      <Container maxWidth="xs" sx={{ p: 5 }}>
-        <Typography variant="h6">
+      <Container maxWidth="xs" sx={{ p: 3 }}>
+        <Typography variant="h6" textAlign="center" mb={3}>
           Social
         </Typography>
-        {social.map((network) => (
-          <Link
-            display="block"
-            variant="body1"
-            href="#"
-            key={network.name}
-            sx={{ mb: 0.5 }}
-          >
-            <Stack direction="row" spacing={1}>
+        <Stack direction="row" gap={3} justifyContent="center">
+          {social.map((network) => (
+            <Fab
+              size="small"
+              color="primary"
+              href={"#"}
+              key={network.name}
+            >
               <network.icon />
-              <span>{network.name}</span>
-            </Stack>
-          </Link>
-        ))}
+            </Fab>
+          ))}
+        </Stack>
       </ Container> 
       <Copyright />
     </Box>

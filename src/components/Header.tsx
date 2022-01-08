@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Toolbar, Button, IconButton, Typography, Link } from "@mui/material"
+import { Toolbar, Button, IconButton, Typography, Link, AppBar, Box, Container } from "@mui/material"
 import { Search as SearchIcon } from '@mui/icons-material';
 import { signIn, signOut, useSession } from "next-auth/react";
 interface HeaderProps {
@@ -32,59 +32,67 @@ export default function Header(props: HeaderProps) {
   }, [ status ]);
 
   return (
-    <React.Fragment>
-      <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Typography
-          component="h2"
-          variant="h5"
-          color="inherit"
-          align="center"
-          noWrap
-          sx={{ flex: 1 }}
+    <Box sx={{ mb: 5 }}>
+      <AppBar position='relative' color='transparent'>
+        <Container maxWidth="lg">
+          <Toolbar>
+            <Typography
+              component="h2"
+              variant="h5"
+              color="inherit"
+              noWrap
+              sx={{ flex: 1 }}
+            > 
+              <Link href="/" underline='none'>
+                {title}
+              </Link>
+            </Typography>
+            <IconButton>
+              <SearchIcon />
+            </IconButton>
+            {
+              status === "authenticated" ?
+              <Button 
+                onClick={() => {
+                  signOut();
+                }}
+                variant="outlined" 
+                size="small">
+                Sign out
+              </Button> :
+              <Button 
+                onClick={() => {
+                  signIn();
+                }}
+                variant="outlined" 
+                size="small">
+                Sign in
+              </Button>
+            }
+          </Toolbar>
+        </Container>
+      </AppBar>
+      {
+        sections.length ?
+        <Toolbar
+          component="nav"
+          variant="dense"
+          sx={{ overflowX: 'auto' }}
         >
-          {title}
-        </Typography>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
-        {
-          status === "authenticated" ?
-          <Button 
-            onClick={() => {
-              signOut();
-            }}
-            variant="outlined" 
-            size="small">
-            Sign out
-          </Button> :
-          <Button 
-            onClick={() => {
-              signIn();
-            }}
-            variant="outlined" 
-            size="small">
-            Sign in
-          </Button>
-        }
-      </Toolbar>
-      <Toolbar
-        component="nav"
-        variant="dense"
-        sx={{ overflowX: 'auto' }}
-      >
-        {sections.map((section) => (
-          <Link
-            color="inherit"
-            noWrap
-            key={section.title}
-            variant="body2"
-            href={section.url}
-            sx={{ p: 1, flexShrink: 0 }}
-          >
-            {section.title}
-          </Link>
-        ))}
-      </Toolbar>
-    </React.Fragment>
+          {sections.map((section) => (
+            <Link
+              color="inherit"
+              noWrap
+              key={section.title}
+              variant="body2"
+              href={section.url}
+              sx={{ p: 1, flexShrink: 0 }}
+            >
+              {section.title}
+            </Link>
+          ))}
+        </Toolbar> : null
+      }
+    </Box>
   );
 }

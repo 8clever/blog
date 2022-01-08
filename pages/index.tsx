@@ -46,7 +46,7 @@ const Home: NextPage<PageProps> = (props) => {
         props.mainPost &&
         <MainFeaturedPost post={props.mainPost} withLink />
       }
-      <Grid container spacing={1}>
+      <Grid container spacing={3} sx={{ mb: 3 }}>
         {props.featuredPosts.map((post, idx) => (
           <FeaturedPost key={idx} post={post} />
         ))}

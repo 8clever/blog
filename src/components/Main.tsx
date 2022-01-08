@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Typography, Divider } from "@mui/material"
+import { Box, Typography, Divider } from "@mui/material"
 import Markdown from './Markdown';
 
 interface MainProps {
@@ -11,10 +11,7 @@ export default function Main(props: MainProps) {
   const { posts, title } = props;
 
   return (
-    <Grid
-      item
-      xs={12}
-      md={8}
+    <Box
       sx={{
         '& .markdown': {
           py: 3,
@@ -30,6 +27,6 @@ export default function Main(props: MainProps) {
           {post}
         </Markdown>
       ))}
-    </Grid>
+    </Box>
   );
 }

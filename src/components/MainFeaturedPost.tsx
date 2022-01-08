@@ -16,7 +16,7 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
         position: 'relative',
         backgroundColor: 'grey.800',
         color: '#fff',
-        mb: 1,
+        mb: 3,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
