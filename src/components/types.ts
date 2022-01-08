@@ -3,8 +3,8 @@ import { Api } from "../api";
 export namespace Blog {
   export class Image {
     url: string = "https://source.unsplash.com/random";
-    label: string = "Test image";
-    author: string = "";
+    label: string = "Random";
+    author: string = "Unsplash";
   }
 
   export class Post {

@@ -95,13 +95,20 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
         <Button 
           variant="outlined"
           onClick={() => setVisibleImageSearch(true)}>
-          Photo: {post.image.url}
+          Photo: {post.image.label} by {post.image.author}
         </Button>
         <SearchImages 
           visible={visibleImageSearch}
           toggle={() => setVisibleImageSearch(false)}
           onSelect={photo => {
-
+            const image = new Blog.Image();
+            image.author = photo.user.name;
+            image.label = photo.alt_description;
+            image.url = photo.urls.regular;
+            setPost({
+              ...post,
+              image
+            });
           }}
         />
         <TextField 
