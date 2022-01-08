@@ -1,5 +1,6 @@
 import { wrap } from "@mikro-orm/core"
 import { Box, Button, Stack, TextField, Typography } from "@mui/material"
+import { Image as ImageIcon } from "@mui/icons-material"
 import { GetServerSideProps, NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
 import React from "react"
@@ -46,15 +47,16 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
 
   const [ visibleImageSearch, setVisibleImageSearch ] = React.useState(false);
 
+  const [ visibleImageSearchForText, setVisibleImageSearchFormText ] = React.useState(false);
+
   return (
     <Layout>
       <Stack direction={"column"} spacing={1}>
         <Typography variant="h4">
           Edit featured post
         </Typography>
-        <Box sx={{ textAlign: "right" }}>
+        <Stack direction="row" gap={1} justifyContent="end">
           <Button 
-            sx={{ mr: 1 }}
             variant="contained"
             onClick={() => {
               Blog.Post.Save(post);
@@ -67,7 +69,7 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
             href="/admin/">
             Cancel
           </Button>
-        </Box>
+        </Stack>
         <TextField 
           required
           fullWidth
@@ -126,6 +128,29 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
             })
           }}
         />
+        <Stack direction="row" gap={1} justifyContent="end">
+          <Button 
+            onClick={() => setVisibleImageSearchFormText(true)}
+            size="small" variant="outlined">
+            <ImageIcon />
+          </Button>
+          <SearchImages 
+              visible={visibleImageSearchForText}
+              toggle={() => setVisibleImageSearchFormText(false)}
+              onSelect={photo => {
+                const text = [ 
+                  post.post, 
+                  `![${photo.alt_description}](${photo.urls.regular})`,
+                  "",
+                  `*Photo by ${photo.user.name}*`
+                ]
+                setPost({
+                  ...post,
+                  post: text.join("\n")
+                })
+              }}
+            />
+        </Stack>
         <TextField 
           required
           fullWidth
