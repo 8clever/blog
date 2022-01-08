@@ -46,19 +46,12 @@ const Home: NextPage<PageProps> = (props) => {
         props.mainPost &&
         <MainFeaturedPost post={props.mainPost} withLink />
       }
-      <Grid container spacing={4}>
+      <Grid container spacing={1}>
         {props.featuredPosts.map((post, idx) => (
           <FeaturedPost key={idx} post={post} />
         ))}
       </Grid>
-      <Grid container spacing={5} sx={{ mt: 3 }}>
-        <Main title="From the firehose" posts={props.posts.map(p => p.post)} />
-        <Sidebar
-          title={data.sidebar.title}
-          description={data.sidebar.description}
-          social={data.sidebar.social}
-        />
-      </Grid>
+      <Main title="From the firehose" posts={props.posts.map(p => p.post)} />
     </Layout>
   )
 }

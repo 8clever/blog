@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { Box, Container, Typography, Link } from "@mui/material"
+import { Box, Container, Typography, Link, Stack } from "@mui/material"
+import { GitHub as GitHubIcon, Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
 
-function Copyright() {
+export function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary" align="center">
+    <Typography 
+      sx={{ p: 1 }}
+      variant="body2" 
+      color="text.secondary" 
+      align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
@@ -14,30 +19,38 @@ function Copyright() {
   );
 }
 
+const social = [
+  { name: 'GitHub', icon: GitHubIcon },
+  { name: 'Twitter', icon: TwitterIcon },
+  { name: 'Facebook', icon: FacebookIcon }
+];
+
 interface FooterProps {
-  description: string;
-  title: string;
 }
 
 export default function Footer(props: FooterProps) {
-  const { description, title } = props;
-
   return (
-    <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6, mt: 1 }}>
-      <Container maxWidth="lg">
-        <Typography variant="h6" align="center" gutterBottom>
-          {title}
+    <Box component="footer">
+      <Container maxWidth="xs" sx={{ p: 5 }}>
+        <Typography variant="h6">
+          Social
         </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          {description}
-        </Typography>
-        <Copyright />
-      </Container>
+        {social.map((network) => (
+          <Link
+            display="block"
+            variant="body1"
+            href="#"
+            key={network.name}
+            sx={{ mb: 0.5 }}
+          >
+            <Stack direction="row" spacing={1}>
+              <network.icon />
+              <span>{network.name}</span>
+            </Stack>
+          </Link>
+        ))}
+      </ Container> 
+      <Copyright />
     </Box>
   );
 }

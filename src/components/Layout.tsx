@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { CssBaseline, Container, createTheme, ThemeProvider } from "@mui/material"
+import { CssBaseline, Container, createTheme, ThemeProvider, Stack, Box } from "@mui/material"
 import Header from './Header';
 import Footer from './Footer';
-import { data } from "./data";
+import { blue } from '@mui/material/colors';
 
 const theme = createTheme();
 
@@ -22,16 +22,17 @@ interface LayoutProps {
 export function Layout(props: LayoutProps) {
   return (
     <Theme>
-      <Container maxWidth="lg">
-        <Header title="News" />
-        <main>
-          {props.children}
-        </main>
-      </Container>
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
+      <Stack justifyContent={"space-between"} sx={{ height: "100vh" }}>
+        <Container maxWidth="lg">
+          <Header title="News" />
+          <main>
+            {props.children}
+          </main>
+        </Container>
+        <Box sx={{ background: blue[50] }}>
+          <Footer />
+        </Box>
+      </Stack>
     </Theme>
   );
 }

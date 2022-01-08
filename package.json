@@ -5,7 +5,8 @@
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/server/index.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "mongo": "docker-compose up mongo"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",

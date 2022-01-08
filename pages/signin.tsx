@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Avatar, Button, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container, ThemeProvider, Alert } from "@mui/material"
+import { Avatar, Button, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container, Alert } from "@mui/material"
 import { LockOutlined as LockOutlinedIcon } from "@mui/icons-material"
 import { Theme } from '../src/components/Layout';
-import Footer from '../src/components/Footer';
 import { GetServerSideProps, NextPage } from 'next';
 import { getCsrfToken } from "next-auth/react"
 import { useRouter } from 'next/router';
+import { Copyright } from '../src/components/Footer';
 
 export const getServerSideProps: GetServerSideProps<NextProps> =  async (context) => {
   return {
@@ -28,7 +28,8 @@ const SignIn: NextPage<NextProps> = function SignIn (props) {
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
-            marginTop: 8,
+            mb: 5,
+            mt: 5,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -97,10 +98,7 @@ const SignIn: NextPage<NextProps> = function SignIn (props) {
             </Grid>
           </Box>
         </Box>
-        <Footer 
-          title="Footer"
-          description="Something here to give the footer a purpose!"
-        />
+        <Copyright />
       </Container>
     </Theme>
   );

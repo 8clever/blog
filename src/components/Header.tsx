@@ -6,9 +6,12 @@ interface HeaderProps {
   title: string;
 }
 
-const rootSections = [
-  { title: 'Home', url: '/' },
-];
+interface RootSection {
+  title: string;
+  url: string;
+}
+
+const rootSections: RootSection[] = [];
 
 export default function Header(props: HeaderProps) {
   const { title } = props;
