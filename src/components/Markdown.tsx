@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactMarkdown, { MarkdownToJSX } from 'markdown-to-jsx';
-import { Typography, Link, Box } from "@mui/material";
+import { Typography, Link, Box, CardMedia } from "@mui/material";
 
 function MarkdownListItem(props: any) {
   return <Box component="li" sx={{ mt: 1, typography: 'body1' }} {...props} />;
@@ -40,6 +40,15 @@ const options = {
     li: {
       component: MarkdownListItem,
     },
+    img: { 
+      component: CardMedia,
+      props: {
+        component: "img",
+        sx: {
+          borderRadius: 1
+        }
+      }
+    }
   },
 };
 

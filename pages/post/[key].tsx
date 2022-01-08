@@ -1,5 +1,5 @@
 import { wrap } from "@mikro-orm/core";
-import { Divider } from "@mui/material";
+import { Divider, Stack, Button } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { DataBase, Post } from "../../server/connectors";
@@ -7,6 +7,7 @@ import { Layout } from "../../src/components/Layout";
 import MainFeaturedPost from "../../src/components/MainFeaturedPost";
 import Markdown from "../../src/components/Markdown";
 import { Blog } from "../../src/components/types";
+import { useSession } from 'next-auth/react';
 
 interface PageProps {
   post: Blog.Post
@@ -32,8 +33,19 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageParams> = asy
 }
 
 const PostPage: NextPage<PageProps> = (props) => {
+
+  const { status } = useSession();
+
   return (
     <Layout>
+      {
+        status === "authenticated" ?
+        <Stack direction={"row"} gap={1} justifyContent={"end"} sx={{ mb: 1 }}>
+          <Button variant="contained" href={`/admin/edit-post?key=${props.post.key}`}>
+            Edit
+          </Button>
+        </Stack> : null
+      }
       <MainFeaturedPost 
         post={props.post}
       />
