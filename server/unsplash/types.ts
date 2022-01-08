@@ -1,6 +1,7 @@
 
 export namespace Unsplash {
   export interface Photo {
+    id: string;
     alt_description: "aerial photo of city during golden hour"
     links: {
       download: string;

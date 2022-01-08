@@ -1,7 +1,8 @@
-import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, ImageList, ImageListItem, Pagination, TextField } from "@mui/material";
+import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, Fab, ImageList, ImageListItem, Pagination, TextField } from "@mui/material";
 import React from "react";
 import { Unsplash } from "../../server/unsplash/types";
 import qs, { ParsedUrlQuery } from 'querystring';
+import { useTheme } from "@mui/material";
 
 interface Props {
   visible: boolean;
@@ -33,6 +34,8 @@ export const SearchImages = (props: Props) => {
 
   const [ loading, setLoading ] = React.useState(false);
 
+  const [ selectedPhoto, setSelectedPhoto ] = React.useState<Unsplash.Photo | null>(null);
+
   React.useEffect(() => {
     if (props.visible) return;
     setValue("");
@@ -42,6 +45,7 @@ export const SearchImages = (props: Props) => {
       results: []
     });
     setPage(1);
+    setSelectedPhoto(null);
   }, [
     props.visible
   ])
@@ -63,6 +67,8 @@ export const SearchImages = (props: Props) => {
     value,
     page
   ]);
+
+  const theme = useTheme();
 
   return (
     <Dialog fullScreen open={props.visible} onClose={props.toggle}>
@@ -87,8 +93,17 @@ export const SearchImages = (props: Props) => {
         }
         <ImageList 
           variant="quilted" cols={5} rowHeight={150}>
-          {photos.results.map((i, idx) => (
-            <ImageListItem key={idx}>
+          {photos.results.map((i) => (
+            <ImageListItem 
+              sx={i.id === selectedPhoto?.id ? {
+                borderStyle: "solid",
+                borderColor: theme.palette.primary.main,
+                borderRadius: 1
+              } : { cursor: "pointer" }}
+              onClick={() => {
+                setSelectedPhoto(i);
+              }}
+              key={i.id}>
               <img
                 src={i.urls.thumb}
                 loading="lazy"
@@ -105,8 +120,20 @@ export const SearchImages = (props: Props) => {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={props.toggle} color="secondary">Cancel</Button>
-        <Button variant="contained">Select</Button>
+        <Button 
+          onClick={props.toggle} 
+          color="secondary">
+          Cancel
+        </Button>
+        <Button 
+          onClick={() => {
+            props.onSelect(selectedPhoto as Unsplash.Photo);
+            props.toggle();
+          }}
+          disabled={!selectedPhoto}
+          variant="contained">
+          Select
+        </Button>
       </DialogActions>
     </Dialog>
   )
