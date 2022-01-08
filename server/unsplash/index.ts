@@ -8,14 +8,14 @@ export class Unsplash {
 
   private apiUrl = "https://api.unsplash.com"
 
-  searchPhotos = async (term: string, options: object = {}) => {
+  searchPhotos = async (term: string, options: object = {}): Promise<Type.SearchResult> => {
     const queryString = qs.stringify({
       ...options,
       query: term,
       client_id: this.accessToken
     })
     const res = await fetch(`${this.apiUrl}/search/photos?${queryString}`);
-    const data: Type.Photo[] = await res.json();
+    const data = await res.json();
     return data;
   }
 }

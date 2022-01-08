@@ -19,4 +19,10 @@ export namespace Unsplash {
       name: string;
     }
   }
+
+  export interface SearchResult {
+    results: Photo[],
+    total: number;
+    total_pages: number;
+  }
 }

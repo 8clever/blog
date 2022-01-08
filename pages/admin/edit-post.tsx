@@ -1,10 +1,11 @@
 import { wrap } from "@mikro-orm/core"
-import { Box, Button, Container, Stack, TextField, Typography } from "@mui/material"
+import { Box, Button, Stack, TextField, Typography } from "@mui/material"
 import { GetServerSideProps, NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
 import React from "react"
 import { DataBase, Post } from "../../server/connectors"
 import { Layout } from "../../src/components/Layout"
+import { SearchImages } from "../../src/components/SearchImages"
 import { Blog } from "../../src/components/types"
 
 interface PageProps {
@@ -41,7 +42,9 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageParams> = asy
 
 const EditFeaturedPost: NextPage<PageProps> = (props) => {
 
-  const [ post, setPost ] = React.useState<Blog.Post>(props.post || new Blog.Post())
+  const [ post, setPost ] = React.useState<Blog.Post>(props.post || new Blog.Post());
+
+  const [ visibleImageSearch, setVisibleImageSearch ] = React.useState(false);
 
   return (
     <Layout>
@@ -51,13 +54,17 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
         </Typography>
         <Box sx={{ textAlign: "right" }}>
           <Button 
+            sx={{ mr: 1 }}
+            variant="contained"
             onClick={() => {
               Blog.Post.Save(post);
             }}
             color="primary">
             Save
           </Button>
-          <Button color="secondary" href="/admin/">
+          <Button 
+            color="secondary" 
+            href="/admin/">
             Cancel
           </Button>
         </Box>
@@ -85,35 +92,16 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
             })
           }}
         />
-        <TextField 
-          required
-          type="url"
-          fullWidth
-          label="Ссылка на изображение"
-          value={post.image.url}
-          onChange={e => {
-            setPost({
-              ...post,
-              image: {
-                ...post.image,
-                url: e.target.value
-              }
-            })
-          }}
-        />
-        <TextField 
-          required
-          fullWidth
-          label="Текст изображения"
-          value={post.image.label}
-          onChange={e => {
-            setPost({
-              ...post,
-              image: {
-                ...post.image,
-                label: e.target.value
-              }
-            })
+        <Button 
+          variant="outlined"
+          onClick={() => setVisibleImageSearch(true)}>
+          Photo: {post.image.url}
+        </Button>
+        <SearchImages 
+          visible={visibleImageSearch}
+          toggle={() => setVisibleImageSearch(false)}
+          onSelect={photo => {
+
           }}
         />
         <TextField 

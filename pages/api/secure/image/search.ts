@@ -9,11 +9,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   
     const unsplash = new Unsplash();
-    const images = await unsplash.searchPhotos(req.query.term as string);
-
-    const response: ResponseSuccess<typeof images> = {
+    const { term, ...options } = req.query;
+    const result = await unsplash.searchPhotos(term as string, options);
+    const response: ResponseSuccess<typeof result> = {
       message:  "SUCCESS",
-      data: images
+      data: result
     }
     res.json(response);
   } catch (e: any) {
