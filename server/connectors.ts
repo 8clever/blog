@@ -1,4 +1,4 @@
-import { MikroORM, EntityName, EntityManager, RequestContext } from "@mikro-orm/core";
+import { MikroORM, EntityName, EntityManager } from "@mikro-orm/core";
 import { rootConfig } from "../rootConfig";
 import { Image } from "./entities/Image";
 import { Post } from "./entities/Post";
