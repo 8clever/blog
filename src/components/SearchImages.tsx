@@ -131,7 +131,7 @@ export const SearchImages = (props: Props) => {
               value={image.author}
               onChange={e => setImage({
                 ...image,
-                author: image.author
+                author: e.target.value
               })}
             />
           </> :

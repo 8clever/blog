@@ -25,10 +25,7 @@ const social = [
   { name: 'Facebook', icon: FacebookIcon }
 ];
 
-interface FooterProps {
-}
-
-export default function Footer(props: FooterProps) {
+export default function Footer() {
   return (
     <Box component="footer">
       <Container maxWidth="xs" sx={{ p: 3 }}>

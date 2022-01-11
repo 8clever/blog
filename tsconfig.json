@@ -17,8 +17,7 @@
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "declaration": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedLocals": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

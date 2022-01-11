@@ -14,7 +14,7 @@ export default NextAuth({
         username: { label: "Login", type: "text" },
         password: {  label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (credentials?.password === rootConfig.SECRET) {
           return {
             ...credentials,
