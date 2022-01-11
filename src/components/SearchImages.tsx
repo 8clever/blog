@@ -3,11 +3,12 @@ import React from "react";
 import { Unsplash } from "../../server/unsplash/types";
 import qs, { ParsedUrlQuery } from 'querystring';
 import { useTheme } from "@mui/material";
+import { Blog } from "./types";
 
 interface Props {
   visible: boolean;
   toggle: () => void;
-  onSelect: (photo: Unsplash.Photo) => void;
+  onSelect: (img: Blog.Image) => void;
 }
 
 const apiRequest = async (term: string, options: ParsedUrlQuery = {}) => {
@@ -127,7 +128,12 @@ export const SearchImages = (props: Props) => {
         </Button>
         <Button 
           onClick={() => {
-            props.onSelect(selectedPhoto as Unsplash.Photo);
+            if (!selectedPhoto) return;
+            const img = new Blog.Image();
+            img.author = selectedPhoto.user.name;
+            img.url = selectedPhoto.urls.regular;
+            img.label = selectedPhoto.alt_description;
+            props.onSelect(img);
             props.toggle();
           }}
           disabled={!selectedPhoto}

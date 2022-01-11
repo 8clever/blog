@@ -7,7 +7,7 @@ import { Image } from './Image';
 export class Post implements Blog.Post {
 
   @PrimaryKey()
-  _id!: ObjectId;
+  _id: ObjectId = new ObjectId();
 
   @Property()
   @Unique()

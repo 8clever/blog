@@ -102,11 +102,7 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
         <SearchImages 
           visible={visibleImageSearch}
           toggle={() => setVisibleImageSearch(false)}
-          onSelect={photo => {
-            const image = new Blog.Image();
-            image.author = photo.user.name;
-            image.label = photo.alt_description;
-            image.url = photo.urls.regular;
+          onSelect={image => {
             setPost({
               ...post,
               image
@@ -137,12 +133,12 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
           <SearchImages 
               visible={visibleImageSearchForText}
               toggle={() => setVisibleImageSearchFormText(false)}
-              onSelect={photo => {
+              onSelect={image => {
                 const text = [ 
                   post.post, 
-                  `![${photo.alt_description}](${photo.urls.regular})`,
+                  `![${image.label}](${image.url})`,
                   "",
-                  `*Photo by ${photo.user.name}*`
+                  `*Photo by ${image.author}*`
                 ]
                 setPost({
                   ...post,
