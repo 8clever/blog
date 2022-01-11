@@ -8,6 +8,7 @@ export namespace Blog {
   }
 
   export class Post {
+    id?: string;
     key: string = "test_key";
     title: string = "Test post";
     description: string = "Test post";
@@ -23,6 +24,11 @@ export namespace Blog {
 
     public static Save = async (post: Post) => {
       const api = new Api("/api/secure/post/update");
+      await api.post(post);
+    }
+
+    public static Delete = async (post: Post) => {
+      const api = new Api("/api/secure/post/delete");
       await api.post(post);
     }
   }

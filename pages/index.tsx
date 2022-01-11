@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
 
   const db = new DataBase();
   await db.init();
-  const postsRepo = db.getRepo(db.entities.Post);
+  const postsRepo = db.getRepo(DataBase.Entities.Post);
   
   const [ mainPost, ...featuredPosts ] = (await postsRepo.find({}, {
     orderBy: {

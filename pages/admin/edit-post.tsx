@@ -1,5 +1,5 @@
 import { wrap } from "@mikro-orm/core"
-import { Button, Stack, TextField, Typography } from "@mui/material"
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, TextField, Typography } from "@mui/material"
 import { Image as ImageIcon } from "@mui/icons-material"
 import { GetServerSideProps, NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageParams> = asy
   if (props.query.key) {
     const db = new DataBase();
     await db.init();
-    const repo = db.getRepo(db.entities.Post);
+    const repo = db.getRepo(DataBase.Entities.Post);
     const post = await repo.findOne({ key: props.query.key });
 
     if (post) {
@@ -49,6 +49,8 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
 
   const [ visibleImageSearchForText, setVisibleImageSearchFormText ] = React.useState(false);
 
+  const [ visibleDeleteConfirmation, setVisibleDeleteConfirmation ] = React.useState(false);
+
   return (
     <Layout>
       <Stack direction={"column"} spacing={1}>
@@ -58,8 +60,10 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
         <Stack direction="row" gap={1} justifyContent="end">
           <Button 
             variant="contained"
-            onClick={() => {
-              Blog.Post.Save(post);
+            onClick={async () => {
+              await Blog.Post.Save(post);
+              if (post.id) return;
+              window.location.href = "/admin/edit-post?key=" + post.key
             }}
             color="primary">
             Save
@@ -69,6 +73,39 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
             href="/admin/">
             Cancel
           </Button>
+          {
+            post.id ?
+            <Button 
+              onClick={async () => {
+                setVisibleDeleteConfirmation(true);
+              }}
+              color="error">
+              Remove
+            </Button> : null
+          }
+          <Dialog open={visibleDeleteConfirmation}>
+            <DialogTitle>
+              Attention!
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                You are really want to delete post {`"${post.title}"`}?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                color="secondary"
+                onClick={() => setVisibleDeleteConfirmation(false)}>
+                Cancel
+              </Button>
+              <Button onClick={async () => {
+                await Blog.Post.Delete(post);
+                window.location.href = "/admin/";
+              }} autoFocus color="error">
+                Confirm
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Stack>
         <TextField 
           required

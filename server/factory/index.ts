@@ -7,7 +7,7 @@ export class FactoryEndpoint {
 
   }
 
-  async handler(req: NextApiRequest, res: NextApiResponse) {
+  handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       if (req.method !== 'POST') {
         throw new Error("Only POST method available")

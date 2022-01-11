@@ -20,19 +20,22 @@ class DataBase {
 
   orm = g.__ORM__;
 
-  entities = g.__ENTITIES__;
+  public static Entities = (
+    g.__ENTITIES__ ?
+    g.__ENTITIES__ :
+    g.__ENTITIES__ = entities
+  )
 
   init = async () => {
     if (this.orm) return;
 
-    this.entities = g.__ENTITIES__ = entities;
     this.orm = g.__ORM__ = await MikroORM.init({
       validate: true,
       ensureIndexes: true,
       type: "mongo",
       clientUrl: rootConfig.MONGODB_URL,
       dbName: "blog",
-      entities: Object.values(this.entities)
+      entities: Object.values(DataBase.Entities)
     });
   }
 

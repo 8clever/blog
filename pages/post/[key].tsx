@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageParams> = asy
   const db = new DataBase();
   await db.init();
 
-  const repo = db.getRepo(db.entities.Post);
+  const repo = db.getRepo(DataBase.Entities.Post);
   const post = await repo.findOne({ key: props.params?.key });
 
   return {
