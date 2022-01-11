@@ -1,48 +1,46 @@
-import { MikroORM, EntityName, EntityManager } from "@mikro-orm/core";
+import { MikroORM, EntityName } from "@mikro-orm/core";
 import { rootConfig } from "../rootConfig";
 import { Image } from "./entities/Image";
 import { Post } from "./entities/Post";
 
-function getGlobal (): { __ORM__?: MikroORM } {
+const entities = {
+  Post,
+  Image
+}
+
+function getGlobal (): { 
+  __ORM__: MikroORM
+  __ENTITIES__: typeof entities
+} {
   return global as any
 }
 
+const g = getGlobal();
 class DataBase {
 
-  em!: EntityManager;
+  orm = g.__ORM__;
+
+  entities = g.__ENTITIES__;
 
   init = async () => {
-    if (this.em) return;
+    if (this.orm) return;
 
-    const g = getGlobal();
-    if (g.__ORM__) {
-      this.em = g.__ORM__.em;
-      return;
-    }
-
-    g.__ORM__ = await MikroORM.init({
+    this.entities = g.__ENTITIES__ = entities;
+    this.orm = g.__ORM__ = await MikroORM.init({
       validate: true,
       ensureIndexes: true,
       type: "mongo",
       clientUrl: rootConfig.MONGODB_URL,
       dbName: "blog",
-      entities: [
-        Post,
-        Image
-      ]
+      entities: Object.values(this.entities)
     });
-
-    this.em = g.__ORM__.em;
   }
 
   getRepo<Entity> (target: EntityName<Entity>) {
-    return this.em.getRepository(target);
+    return this.orm.em.getRepository(target);
   }
 }
 
 export {
-  DataBase,
-
-  Image,
-  Post
+  DataBase
 }

@@ -1,6 +1,6 @@
 import { wrap } from "@mikro-orm/core";
 import { NextApiRequest, NextApiResponse } from "next"
-import { DataBase, Post } from "../../../../server/connectors"
+import { DataBase } from "../../../../server/connectors"
 import { Blog } from "../../../../src/components/types";
 import type { ResponseError, ResponseSuccess } from "../../../../src/api"
 import { ObjectId } from "@mikro-orm/mongodb";
@@ -19,11 +19,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     delete dto.dateCreated;
     delete dto.dateUpdated;
 
-    const repo = db.getRepo<Post>(Post)
+    const repo = db.getRepo(db.entities.Post)
     let post = await repo.findOne({ _id: new ObjectId(dto.id) });
 
     if (!post) {
-      post = new Post();
+      post = new db.entities.Post();
     }
     
     wrap(post).assign(dto);

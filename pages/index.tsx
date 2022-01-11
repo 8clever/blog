@@ -1,7 +1,7 @@
 import { wrap } from '@mikro-orm/core'
 import { Stack } from '@mui/material'
 import type { GetServerSideProps, NextPage } from 'next'
-import { DataBase, Post } from '../server/connectors'
+import { DataBase } from '../server/connectors'
 import FeaturedPost from '../src/components/FeaturedPost'
 import { Layout } from '../src/components/Layout'
 import MainFeaturedPost from '../src/components/MainFeaturedPost'
@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
 
   const db = new DataBase();
   await db.init();
-  const postsRepo = db.getRepo<Post>(Post);
+  const postsRepo = db.getRepo(db.entities.Post);
   
   const [ mainPost, ...featuredPosts ] = (await postsRepo.find({}, {
     orderBy: {
@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
       dateCreated: "ASC"
     },
     limit: 10
-  })).map(p => wrap(p).toJSON() as Post);
+  })).map(p => wrap(p).toJSON() as Blog.Post);
 
   return {
     props: {

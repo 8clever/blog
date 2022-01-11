@@ -4,13 +4,13 @@ import { Image as ImageIcon } from "@mui/icons-material"
 import { GetServerSideProps, NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
 import React from "react"
-import { DataBase, Post } from "../../server/connectors"
+import { DataBase } from "../../server/connectors"
 import { Layout } from "../../src/components/Layout"
 import { SearchImages } from "../../src/components/SearchImages"
 import { Blog } from "../../src/components/types"
 
 interface PageProps {
-  post?: Post
+  post?: Blog.Post
 }
 
 interface PageParams extends ParsedUrlQuery {
@@ -22,13 +22,13 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageParams> = asy
   if (props.query.key) {
     const db = new DataBase();
     await db.init();
-    const repo = db.getRepo(Post);
+    const repo = db.getRepo(db.entities.Post);
     const post = await repo.findOne({ key: props.query.key });
 
     if (post) {
       return {
         props: {
-          post: wrap(post).toJSON() as Post
+          post: wrap(post).toJSON() as Blog.Post
         }
       }
     }

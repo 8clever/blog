@@ -2,7 +2,7 @@ import { wrap } from "@mikro-orm/core";
 import { Divider, Stack, Button } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { DataBase, Post } from "../../server/connectors";
+import { DataBase } from "../../server/connectors";
 import { Layout } from "../../src/components/Layout";
 import MainFeaturedPost from "../../src/components/MainFeaturedPost";
 import Markdown from "../../src/components/Markdown";
@@ -22,12 +22,12 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageParams> = asy
   const db = new DataBase();
   await db.init();
 
-  const repo = db.getRepo(Post);
+  const repo = db.getRepo(db.entities.Post);
   const post = await repo.findOne({ key: props.params?.key });
 
   return {
     props: {
-      post: wrap(post).toJSON() as Post
+      post: wrap(post).toJSON() as Blog.Post
     }
   }
 }
