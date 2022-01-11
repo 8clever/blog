@@ -1,5 +1,5 @@
 import { wrap } from "@mikro-orm/core"
-import { Box, Button, Stack, TextField, Typography } from "@mui/material"
+import { Button, Stack, TextField, Typography } from "@mui/material"
 import { Image as ImageIcon } from "@mui/icons-material"
 import { GetServerSideProps, NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
