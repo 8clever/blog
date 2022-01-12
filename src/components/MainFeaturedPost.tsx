@@ -16,11 +16,11 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
         position: "relative",
         backgroundColor: theme.palette.secondary.dark,
         color: theme.palette.secondary.contrastText,
-        height: 300
+        height: "25vh"
       }}>
         <CardMedia
           sx={{
-            height: 300
+            height: "25vh"
           }}
           component={"img"}
           image={post.image.url}

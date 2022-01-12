@@ -1,11 +1,10 @@
 import { wrap } from '@mikro-orm/core'
-import { Pagination, Stack, Typography } from '@mui/material'
+import { Box, Pagination, Stack, Typography } from '@mui/material'
 import type { GetServerSideProps, NextPage } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { DataBase } from '../server/connectors'
 import FeaturedPost from '../src/components/FeaturedPost'
 import { Layout } from '../src/components/Layout'
-import MainFeaturedPost from '../src/components/MainFeaturedPost'
 import { Blog } from '../src/components/types'
 
 interface PageProps {
@@ -104,12 +103,14 @@ const Home: NextPage<PageProps> = (props) => {
   return (
     <Layout>
       <Stack spacing={3}>
-        <Typography component="h1" variant="h3">
-          Breaking news
-        </Typography>
+        <Box>
+          <Typography component="h1" variant="h3">
+            Breaking news
+          </Typography>
+        </Box>
         {
           props.mainPost &&
-          <MainFeaturedPost post={props.mainPost} />
+          <FeaturedPost post={props.mainPost} />
         }
         {props.featuredPosts.map((post, idx) => (
           <FeaturedPost key={idx} post={post} />
