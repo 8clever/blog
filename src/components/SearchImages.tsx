@@ -180,34 +180,34 @@ export const SearchImages = (props: Props) => {
           </>
           : null
         }
-      </DialogContent>
-      <DialogActions>
-        <Button 
-          onClick={props.toggle} 
-          color="secondary">
-          Cancel
-        </Button>
-        <Button 
-          onClick={() => {
-            if (tab === TabName.CustomLink) {
-              props.onSelect(image);
-              props.toggle();
-              return;
-            }
+        <DialogActions>
+          <Button 
+            onClick={props.toggle} 
+            color="secondary">
+            Cancel
+          </Button>
+          <Button 
+            onClick={() => {
+              if (tab === TabName.CustomLink) {
+                props.onSelect(image);
+                props.toggle();
+                return;
+              }
 
-            if (tab === TabName.Unsplash && selectedPhoto) {
-              const img = new Blog.Image();
-              img.author = selectedPhoto.user.name;
-              img.url = selectedPhoto.urls.regular;
-              img.label = selectedPhoto.alt_description;
-              props.onSelect(img);
-              props.toggle();
-            }
-          }}
-          variant="contained">
-          Select
-        </Button>
-      </DialogActions>
+              if (tab === TabName.Unsplash && selectedPhoto) {
+                const img = new Blog.Image();
+                img.author = selectedPhoto.user.name;
+                img.url = selectedPhoto.urls.regular;
+                img.label = selectedPhoto.alt_description;
+                props.onSelect(img);
+                props.toggle();
+              }
+            }}
+            variant="contained">
+            Select
+          </Button>
+        </DialogActions>
+      </DialogContent>
     </Dialog>
   )
 }
