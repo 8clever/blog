@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, Container, Typography, Link, Stack, Fab } from "@mui/material"
 import { Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
+import { blue } from '@mui/material/colors';
 
 export function Copyright() {
   return (
@@ -33,7 +34,7 @@ const pages = [
 
 export default function Footer() {
   return (
-    <Box component="footer">
+    <Box component="footer" sx={{ background: blue[50] }}>
       <Container maxWidth="xs" sx={{ p: 5 }}>
         <Stack spacing={5}>
           <Stack direction="row" spacing={5} justifyContent="center" flexWrap="wrap">

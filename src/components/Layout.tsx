@@ -2,7 +2,6 @@ import * as React from 'react';
 import { CssBaseline, Container, ThemeProvider, Stack, Box } from "@mui/material"
 import Header from './Header';
 import Footer from './Footer';
-import { blue } from '@mui/material/colors';
 import { theme } from './theme';
 
 export const Theme: React.FC = (props) => {
@@ -30,9 +29,7 @@ export function Layout(props: LayoutProps) {
             </main>
           </Container>
         </Box>
-        <Box sx={{ background: blue[50] }}>
-          <Footer />
-        </Box>
+        <Footer />
       </Stack>
     </Theme>
   );
