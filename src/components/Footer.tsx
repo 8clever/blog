@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Container, Typography, Link, Stack, Fab } from "@mui/material"
-import { GitHub as GitHubIcon, Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
+import { Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
 
 export function Copyright() {
   return (
@@ -20,32 +20,46 @@ export function Copyright() {
 }
 
 const social = [
-  { name: 'GitHub', icon: GitHubIcon },
   { name: 'Twitter', icon: TwitterIcon },
   { name: 'Facebook', icon: FacebookIcon }
 ];
 
+const pages = [
+  { name: "Term of use", link: "" },
+  { name: "Help", link: "" },
+  { name: "Etiquette", link: "" },
+  { name: "About us", link: "" },
+]
+
 export default function Footer() {
   return (
     <Box component="footer">
-      <Container maxWidth="xs" sx={{ p: 3 }}>
-        <Typography variant="h6" textAlign="center" mb={3}>
-          Social
-        </Typography>
-        <Stack direction="row" gap={3} justifyContent="center">
-          {social.map((network) => (
-            <Fab
-              size="small"
-              color="primary"
-              href={"#"}
-              key={network.name}
-            >
-              <network.icon />
-            </Fab>
-          ))}
+      <Container maxWidth="xs" sx={{ p: 5 }}>
+        <Stack spacing={5}>
+          <Stack direction="row" spacing={5} justifyContent="center" flexWrap="wrap">
+            {pages.map(p => {
+              return (
+                <Link href={p.link} key={p.link}>
+                  {p.name}
+                </Link>
+              )
+            })}
+          </Stack>
+          <Stack direction="row" gap={5} justifyContent="center">
+            {social.map((network) => (
+              <Fab
+                size="small"
+                color="primary"
+                href={"#"}
+                key={network.name}
+              >
+                <network.icon />
+              </Fab>
+            ))}
+          </Stack>
+          <Copyright />
         </Stack>
       </ Container> 
-      <Copyright />
     </Box>
   );
 }
