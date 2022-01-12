@@ -50,7 +50,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
 const Home: NextPage<PageProps> = (props) => {
   return (
     <Layout>
-      <Stack spacing={3} sx={{ mb: 3 }}>
+      <Stack spacing={3}>
         <Typography component="h1" variant="h2">
           Braking news
         </Typography>

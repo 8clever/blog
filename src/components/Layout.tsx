@@ -22,7 +22,7 @@ export function Layout(props: LayoutProps) {
   return (
     <Theme>
       <Stack justifyContent={"space-between"} sx={{ height: "100vh" }}>
-        <Box>
+        <Box sx={{ mb: 5 }}>
           <Header title="News" />
           <Container maxWidth="lg">
             <main>

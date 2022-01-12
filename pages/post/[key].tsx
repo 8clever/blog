@@ -1,5 +1,5 @@
 import { wrap } from "@mikro-orm/core";
-import { Divider, Stack, Button, Typography } from "@mui/material";
+import { Divider, Stack, Button, Typography, CardMedia } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { DataBase } from "../../server/connectors";
@@ -62,6 +62,14 @@ const PostPage: NextPage<PageProps> = (props) => {
             null
           }
         </Typography>
+        <CardMedia
+          sx={{
+            maxHeight: 400
+          }}
+          component="img"
+          image={post.image.url}
+          alt={post.image.label}
+        />
       </Stack>
       <Divider sx={{ my: 3 }} />
       <Markdown className="markdown">

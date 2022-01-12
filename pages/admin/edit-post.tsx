@@ -53,7 +53,7 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
 
   return (
     <Layout>
-      <Stack direction={"column"} spacing={1} sx={{ mb: 1 }}>
+      <Stack direction={"column"} spacing={1}>
         <Typography variant="h4">
           Edit featured post
         </Typography>
