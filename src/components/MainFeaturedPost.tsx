@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Typography, Box, CardActionArea, CardMedia, Card } from "@mui/material";
 import { Blog } from './types';
+import { theme } from "./theme";
 
 interface MainFeaturedPostProps {
   post: Blog.Post
@@ -13,12 +14,14 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
     <CardActionArea href={Blog.Post.GetPostUrl(post)} component="a">
       <Card sx={{ 
         position: "relative",
-        backgroundColor: 'grey.800',
-        color: "white",
+        backgroundColor: theme.palette.secondary.dark,
+        color: theme.palette.secondary.contrastText,
         height: 300
       }}>
         <CardMedia
-          sx={{ height: "100%", width: "100%" }}
+          sx={{
+            height: 300
+          }}
           component={"img"}
           image={post.image.url}
           alt={post.image.label}

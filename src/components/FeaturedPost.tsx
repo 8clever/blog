@@ -13,7 +13,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
     <CardActionArea component="a" href={Blog.Post.GetPostUrl(post)}>
       <Card sx={{ display: 'flex', position: "relative", height: 200 }}>
         <CardMedia
-          sx={{ maxWidth: 160, height: "100%" }}
+          sx={{ maxWidth: 160 }}
           component="img"
           image={post.image.url}
           alt={post.image.label}
