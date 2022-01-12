@@ -49,7 +49,7 @@ const PostPage: NextPage<PageProps> = (props) => {
       <MainFeaturedPost 
         post={props.post}
       />
-      <Divider />
+      <Divider sx={{ my: 3 }} />
       <Markdown className="markdown">
         {props.post.post}
       </Markdown>
