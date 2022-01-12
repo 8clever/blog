@@ -1,6 +1,7 @@
 import { wrap } from '@mikro-orm/core'
-import { Stack, Typography } from '@mui/material'
+import { Pagination, Stack, Typography } from '@mui/material'
 import type { GetServerSideProps, NextPage } from 'next'
+import { ParsedUrlQuery } from 'querystring'
 import { DataBase } from '../server/connectors'
 import FeaturedPost from '../src/components/FeaturedPost'
 import { Layout } from '../src/components/Layout'
@@ -8,15 +9,29 @@ import MainFeaturedPost from '../src/components/MainFeaturedPost'
 import { Blog } from '../src/components/types'
 
 interface PageProps {
-  mainPost?: Blog.Post,
-  featuredPosts: Blog.Post[],
+  mainPost?: Blog.Post;
+  featuredPosts: Blog.Post[];
+  total: number;
+  totalPages: number;
+  limit: number;
+  page: number; 
 }
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+interface PageQuery extends ParsedUrlQuery {
+  page?: string;
+  limit?: string;
+}
+
+export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = async (props) => {
 
   const db = new DataBase();
   await db.init();
-  const [ mainPost, ...featuredPosts ] = (await db.em.aggregate(DataBase.Entities.Post, [
+
+  const limit = Number(props.query.limit) || 10;
+  const page = Number(props.query.page) || 1;
+  const skip = limit * (page - 1);
+  
+  const [ raw ] = await db.em.aggregate(DataBase.Entities.Post, [
     {
       $addFields: {
         date: {
@@ -32,17 +47,55 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
       $sort: {
         date: -1,
       }
+    },
+    {
+      $project: {
+        key: 1,
+        dateUpdated: 1,
+        dateCreated: 1,
+        title: 1,
+        description: 1,
+        image: 1
+      }
+    },
+    { 
+      $facet: {
+        total: [
+          { $count: "total" },
+          { $addFields: {
+            page,
+            limit,
+            totalPages: {
+              $ceil: {
+                $divide: [
+                  "$total",
+                  limit
+                ]
+              }
+            }
+          }}
+        ],
+        data: [ 
+          { $skip: skip }, 
+          { $limit: limit } 
+        ]
+      } 
     }
-  ])).map(p => {
+  ]);
+
+  raw.data = raw.data.map((d: Blog.Post) => {
     const post = new DataBase.Entities.Post();
-    Object.assign(post, p);
+    Object.assign(post, d);
     return wrap(post).toJSON() as Blog.Post;
   });
 
+  const { total: [ total ], data: [ mainPost = null, ...featuredPosts ] } = raw;
+
   return {
     props: {
-      mainPost,
       featuredPosts,
+      mainPost,
+      ...total
     }
   }
 }
@@ -61,6 +114,13 @@ const Home: NextPage<PageProps> = (props) => {
         {props.featuredPosts.map((post, idx) => (
           <FeaturedPost key={idx} post={post} />
         ))}
+        <Pagination 
+          count={props.totalPages}
+          page={props.page}
+          onChange={(e, page) => {
+            window.location.href = `/?page=${page}`
+          }}
+        />
       </Stack>
     </Layout>
   )
