@@ -42,7 +42,7 @@ export default function Footer() {
           <Stack direction="row" spacing={5} justifyContent="center" flexWrap="wrap">
             {pages.map(p => {
               return (
-                <Link href={p.link} key={p.link} underline='none'>
+                <Link href={p.link} key={p.name} underline='none'>
                   {p.name}
                 </Link>
               )
