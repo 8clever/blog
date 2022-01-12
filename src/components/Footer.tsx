@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Container, Typography, Link, Stack, Fab, lighten } from "@mui/material"
+import { Box, Container, Typography, Link, Stack, Fab, darken } from "@mui/material"
 import { Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
 import { theme } from './theme';
 
@@ -8,7 +8,7 @@ export function Copyright() {
     <Typography 
       sx={{ p: 1 }}
       variant="body2" 
-      color="text.secondary" 
+      color={theme.palette.secondary.contrastText}
       align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
@@ -32,7 +32,7 @@ const pages = [
   { name: "About us", link: "" },
 ]
 
-const footerBackground = lighten(theme.palette.primary.main, 0.9);
+const footerBackground = darken(theme.palette.secondary.main, 0.5);
 
 export default function Footer() {
   return (
@@ -42,7 +42,7 @@ export default function Footer() {
           <Stack direction="row" spacing={5} justifyContent="center" flexWrap="wrap">
             {pages.map(p => {
               return (
-                <Link href={p.link} key={p.link}>
+                <Link href={p.link} key={p.link} underline='none'>
                   {p.name}
                 </Link>
               )
