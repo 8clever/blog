@@ -52,7 +52,7 @@ const Home: NextPage<PageProps> = (props) => {
     <Layout>
       <Stack spacing={3}>
         <Typography component="h1" variant="h2">
-          Braking news
+          Breaking news
         </Typography>
         {
           props.mainPost &&
