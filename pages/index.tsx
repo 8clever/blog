@@ -104,7 +104,7 @@ const Home: NextPage<PageProps> = (props) => {
   return (
     <Layout>
       <Stack spacing={3}>
-        <Typography component="h1" variant="h2">
+        <Typography component="h1" variant="h3">
           Breaking news
         </Typography>
         {

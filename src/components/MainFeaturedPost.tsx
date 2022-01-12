@@ -32,7 +32,7 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
             inset: 0,
             p: 3
           }}>
-          <Typography component="h3" variant="h3" color="inherit" gutterBottom>
+          <Typography component="h2" variant="h4" color="inherit" gutterBottom>
             {post.title}
           </Typography>
           <Typography variant="subtitle1" color="inherit">
