@@ -14,6 +14,7 @@ export const Image = (props: Props) => {
       sx={{ 
         width: "25vw",
         height: "25vh",
+        borderRadius: 4,
         background: `url(${props.src})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
