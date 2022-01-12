@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { CssBaseline, Container, createTheme, ThemeProvider, Stack, Box } from "@mui/material"
+import { CssBaseline, Container, ThemeProvider, Stack, Box } from "@mui/material"
 import Header from './Header';
 import Footer from './Footer';
 import { blue } from '@mui/material/colors';
-
-const theme = createTheme();
+import { theme } from './theme';
 
 export const Theme: React.FC = (props) => {
   return (

@@ -13,7 +13,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
     <CardActionArea component="a" href={Blog.Post.GetPostUrl(post)}>
       <Card sx={{ display: 'flex' }}>
         <CardMedia
-          sx={{ maxWidth: 160 }}
+          sx={{ width: 160, height: 200 }}
           component="img"
           image={post.image.url}
           alt={post.image.label}
@@ -23,13 +23,18 @@ export default function FeaturedPost(props: FeaturedPostProps) {
             {post.title}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
-            {post.dateCreated && new Date(post.dateCreated).toLocaleDateString()}
+            {
+              post.dateUpdated ?
+              new Date(post.dateUpdated).toLocaleString() :
+
+              post.dateCreated ?
+              new Date(post.dateCreated).toLocaleString() :
+
+              null
+            }
           </Typography>
           <Typography variant="subtitle1" paragraph>
             {post.description}
-          </Typography>
-          <Typography variant="subtitle1" color="primary">
-            Continue reading...
           </Typography>
         </CardContent>
       </Card>

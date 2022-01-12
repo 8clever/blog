@@ -1,4 +1,5 @@
 import { MikroORM, EntityName } from "@mikro-orm/core";
+import { EntityManager } from "@mikro-orm/mongodb";
 import { rootConfig } from "../rootConfig";
 import { Image } from "./entities/Image";
 import { Post } from "./entities/Post";
@@ -19,6 +20,10 @@ const g = getGlobal();
 class DataBase {
 
   orm = g.__ORM__;
+
+  get em () {
+    return this.orm.em as EntityManager;
+  }
 
   public static Entities = (
     g.__ENTITIES__ ?

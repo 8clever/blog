@@ -16,15 +16,28 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
 
   const db = new DataBase();
   await db.init();
-  const postsRepo = db.getRepo(DataBase.Entities.Post);
-  
-  const [ mainPost, ...featuredPosts ] = (await postsRepo.find({}, {
-    orderBy: {
-      dateUpdated: "ASC_NULLS_LAST",
-      dateCreated: "ASC"
+  const [ mainPost, ...featuredPosts ] = (await db.em.aggregate(DataBase.Entities.Post, [
+    {
+      $addFields: {
+        date: {
+          $cond: [
+            "$dateUpdated",
+            "$dateUpdated",
+            "$dateCreated"
+          ]
+        }
+      }
     },
-    limit: 10
-  })).map(p => wrap(p).toJSON() as Blog.Post);
+    {
+      $sort: {
+        date: -1,
+      }
+    }
+  ])).map(p => {
+    const post = new DataBase.Entities.Post();
+    Object.assign(post, p);
+    return wrap(post).toJSON() as Blog.Post;
+  });
 
   return {
     props: {
@@ -37,11 +50,11 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
 const Home: NextPage<PageProps> = (props) => {
   return (
     <Layout>
-      {
-        props.mainPost &&
-        <MainFeaturedPost post={props.mainPost} withLink />
-      }
       <Stack spacing={3} sx={{ mb: 3 }}>
+        {
+          props.mainPost &&
+          <MainFeaturedPost post={props.mainPost} />
+        }
         {props.featuredPosts.map((post, idx) => (
           <FeaturedPost key={idx} post={post} />
         ))}
