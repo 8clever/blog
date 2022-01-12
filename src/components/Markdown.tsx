@@ -45,6 +45,7 @@ const options = {
       props: {
         component: "img",
         sx: {
+          maxHeight: "35vh",
           borderRadius: 1
         }
       }
