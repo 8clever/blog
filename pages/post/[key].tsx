@@ -1,5 +1,5 @@
 import { wrap } from "@mikro-orm/core";
-import { Stack, Button, Typography } from "@mui/material";
+import { Stack, Button, Typography, Card, CardMedia } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { DataBase } from "../../server/connectors";
@@ -62,6 +62,19 @@ const PostPage: NextPage<PageProps> = (props) => {
             null
           }
         </Typography>
+        <Typography>
+          {post.description}
+        </Typography>
+        <Card>
+          <CardMedia 
+            sx={{
+              maxHeight: "35vh"
+            }}
+            component="img"
+            image={post.image.url}
+            alt={post.image.label}
+          />
+        </Card>
         <Markdown className="markdown">
           {props.post.post}
         </Markdown>
