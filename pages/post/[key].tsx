@@ -1,10 +1,9 @@
 import { wrap } from "@mikro-orm/core";
-import { Divider, Stack, Button } from "@mui/material";
+import { Divider, Stack, Button, Typography } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { DataBase } from "../../server/connectors";
 import { Layout } from "../../src/components/Layout";
-import MainFeaturedPost from "../../src/components/MainFeaturedPost";
 import Markdown from "../../src/components/Markdown";
 import { Blog } from "../../src/components/types";
 import { useSession } from 'next-auth/react';
@@ -36,6 +35,8 @@ const PostPage: NextPage<PageProps> = (props) => {
 
   const { status } = useSession();
 
+  const { post } = props;
+
   return (
     <Layout>
       {
@@ -46,9 +47,22 @@ const PostPage: NextPage<PageProps> = (props) => {
           </Button>
         </Stack> : null
       }
-      <MainFeaturedPost 
-        post={props.post}
-      />
+      <Stack spacing={3}>
+        <Typography component="h1" variant="h2">
+          {post.title}
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary">
+          {
+            post.dateUpdated ?
+            new Date(post.dateUpdated).toLocaleString() :
+
+            post.dateCreated ?
+            new Date(post.dateCreated).toLocaleString() :
+
+            null
+          }
+        </Typography>
+      </Stack>
       <Divider sx={{ my: 3 }} />
       <Markdown className="markdown">
         {props.post.post}

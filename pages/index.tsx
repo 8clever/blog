@@ -1,5 +1,5 @@
 import { wrap } from '@mikro-orm/core'
-import { Stack } from '@mui/material'
+import { Stack, Typography } from '@mui/material'
 import type { GetServerSideProps, NextPage } from 'next'
 import { DataBase } from '../server/connectors'
 import FeaturedPost from '../src/components/FeaturedPost'
@@ -51,6 +51,9 @@ const Home: NextPage<PageProps> = (props) => {
   return (
     <Layout>
       <Stack spacing={3} sx={{ mb: 3 }}>
+        <Typography component="h1" variant="h2">
+          Braking news
+        </Typography>
         {
           props.mainPost &&
           <MainFeaturedPost post={props.mainPost} />

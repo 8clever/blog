@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, Card, CardActionArea, CardContent, CardMedia } from "@mui/material"
+import { Typography, Card, CardActionArea, CardContent, CardMedia, Box } from "@mui/material"
 import { Blog } from './types';
 
 interface FeaturedPostProps {
@@ -11,14 +11,14 @@ export default function FeaturedPost(props: FeaturedPostProps) {
 
   return (
     <CardActionArea component="a" href={Blog.Post.GetPostUrl(post)}>
-      <Card sx={{ display: 'flex' }}>
+      <Card sx={{ display: 'flex', position: "relative", height: 200 }}>
         <CardMedia
-          sx={{ width: 160, height: 200 }}
+          sx={{ maxWidth: 160, height: "100%" }}
           component="img"
           image={post.image.url}
           alt={post.image.label}
         />
-        <CardContent sx={{ flex: 1 }}>
+        <CardContent sx={{ flex: 1, position: "relative" }}>
           <Typography component="h2" variant="h5">
             {post.title}
           </Typography>
@@ -36,6 +36,12 @@ export default function FeaturedPost(props: FeaturedPostProps) {
           <Typography variant="subtitle1" paragraph>
             {post.description}
           </Typography>
+          <Box sx={{ 
+            position: "absolute", 
+            inset: 0, 
+            pointerEvents: "none",
+            background: "linear-gradient(transparent 50%, white)"
+          }} />
         </CardContent>
       </Card>
     </CardActionArea>
