@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Typography, Card, CardActionArea, CardContent, CardMedia, Box } from "@mui/material"
+import { Typography, Card, CardActionArea, CardContent, Box } from "@mui/material"
 import { Blog } from './types';
+import { Image } from './Image';
 
 interface FeaturedPostProps {
   post: Blog.Post
@@ -12,12 +13,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
   return (
     <CardActionArea component="a" href={Blog.Post.GetPostUrl(post)}>
       <Card sx={{ display: 'flex', position: "relative", height: "25vh" }}>
-        <CardMedia
-          sx={{ maxWidth: "25vw" }}
-          component="img"
-          image={post.image.url}
-          alt={post.image.label}
-        />
+        <Image src={post.image.url} alt={post.image.label} />
         <CardContent sx={{ flex: 1, position: "relative" }}>
           <Typography component="h2" variant="h5">
             {post.title}

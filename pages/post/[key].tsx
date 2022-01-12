@@ -1,5 +1,5 @@
 import { wrap } from "@mikro-orm/core";
-import { Stack, Button, Typography, Card, CardMedia } from "@mui/material";
+import { Stack, Button, Typography, Card } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { DataBase } from "../../server/connectors";
@@ -7,6 +7,7 @@ import { Layout } from "../../src/components/Layout";
 import Markdown from "../../src/components/Markdown";
 import { Blog } from "../../src/components/types";
 import { useSession } from 'next-auth/react';
+import { Image } from "../../src/components/Image";
 
 interface PageProps {
   post: Blog.Post
@@ -66,14 +67,7 @@ const PostPage: NextPage<PageProps> = (props) => {
           {post.description}
         </Typography>
         <Card>
-          <CardMedia 
-            sx={{
-              maxHeight: "35vh"
-            }}
-            component="img"
-            image={post.image.url}
-            alt={post.image.label}
-          />
+          <Image src={post.image.url} alt={post.image.label} width="100%" height="35vh" />
         </Card>
         <Markdown className="markdown">
           {props.post.post}
