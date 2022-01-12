@@ -65,7 +65,7 @@ const PostPage: NextPage<PageProps> = (props) => {
         <Card>
           <CardMedia
             sx={{
-              maxHeight: "25vh"
+              maxHeight: "20vh"
             }}
             component="img"
             image={post.image.url}
