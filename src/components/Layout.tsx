@@ -22,31 +22,26 @@ interface LayoutProps {
 export function Layout(props: LayoutProps) {
   return (
     <Theme>
+      <Head>
+        {
+          props.description ?
+          <meta name="description" content={props.description} /> : null
+        }
+        {
+          props.title ?
+          <title>{props.title}</title> : null
+        }
+      </Head>
       <Stack justifyContent={"space-between"} sx={{ height: "100vh" }}>
         <Box sx={{ mb: 5 }}>
           <Header title="News" />
           <Container maxWidth="lg">
             <main>
               {
-                props.description ?
-                <Head>
-                  <meta name="description" content={props.description} />
-                </Head> : 
-                null
-              }
-              {
                 props.title ?
-                <>
-                  <Head>
-                    <html lang="en" />
-                    <title>{props.title}</title>
-                  </Head>
-                  <Box>
-                    <Typography component="h1" variant="h3" sx={{ mb: 3 }}>
-                      {props.title}
-                    </Typography>
-                  </Box>
-                </>
+                <Typography component="h1" variant="h3" sx={{ mb: 3 }}>
+                  {props.title}
+                </Typography>
                 : null
               }
               {props.children}
