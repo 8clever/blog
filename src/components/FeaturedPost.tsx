@@ -15,7 +15,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
     <CardActionArea component="a" href={Blog.Post.GetPostUrl(post)}>
       <Card sx={{ 
         height: {
-          sm: "20vh"
+          sm: "200px"
         },
         display: {
           xs: "block",
@@ -57,11 +57,10 @@ export default function FeaturedPost(props: FeaturedPostProps) {
           sx={{
             order: -1,
             width: {
-              sm: "20vw",
-              md: "15vw"
+              sm: "200px"
             },
             height: {
-              xs: "20vh",
+              xs: "150px",
               sm: "100%"
             }
           }}

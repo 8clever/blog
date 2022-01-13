@@ -21,8 +21,8 @@ export const Image = (props: Props) => {
         component="div"
         sx={{ 
           height: {
-            xs: "20vh",
-            sm: "25vh"
+            xs: "200px",
+            sm: "250px"
           },
           background: `url(${props.src})`,
           backgroundPosition: "center",
