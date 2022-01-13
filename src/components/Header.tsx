@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Toolbar, Button, IconButton, Typography, Link, AppBar, Box, Container } from "@mui/material"
-import { Search as SearchIcon } from '@mui/icons-material';
+import { Toolbar, Button, Typography, Link, AppBar, Box, Container } from "@mui/material"
 import { signIn, signOut, useSession } from "next-auth/react";
 interface HeaderProps {
   title: string;
@@ -47,9 +46,6 @@ export default function Header(props: HeaderProps) {
                 {title}
               </Link>
             </Typography>
-            <IconButton>
-              <SearchIcon />
-            </IconButton>
             {
               status === "authenticated" ?
               <Button 

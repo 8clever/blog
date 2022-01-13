@@ -1,5 +1,5 @@
 import { wrap } from '@mikro-orm/core'
-import { Box, Pagination, Stack, Typography } from '@mui/material'
+import { Pagination, Stack } from '@mui/material'
 import type { GetServerSideProps, NextPage } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { DataBase } from '../server/connectors'
@@ -101,13 +101,8 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
 
 const Home: NextPage<PageProps> = (props) => {
   return (
-    <Layout>
+    <Layout title="Breaking news">
       <Stack spacing={3}>
-        <Box>
-          <Typography component="h1" variant="h3">
-            Breaking news
-          </Typography>
-        </Box>
         {
           props.mainPost &&
           <FeaturedPost post={props.mainPost} preload />

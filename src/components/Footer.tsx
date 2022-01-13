@@ -42,7 +42,11 @@ export default function Footer() {
           <Stack direction="row" spacing={5} justifyContent="center" flexWrap="wrap">
             {pages.map(p => {
               return (
-                <Link href={p.link} key={p.name} underline='none'>
+                <Link 
+                  color={theme.palette.secondary.contrastText}
+                  href={p.link} 
+                  key={p.name} 
+                  underline='none'>
                   {p.name}
                 </Link>
               )
@@ -55,6 +59,7 @@ export default function Footer() {
                 color="primary"
                 href={"#"}
                 key={network.name}
+                title={network.name}
               >
                 <network.icon />
               </Fab>

@@ -39,7 +39,7 @@ const PostPage: NextPage<PageProps> = (props) => {
   const { post } = props;
 
   return (
-    <Layout>
+    <Layout title={post.title}>
       {
         status === "authenticated" ?
         <Stack direction={"row"} gap={1} justifyContent={"end"} sx={{ mb: 1 }}>
@@ -49,9 +49,6 @@ const PostPage: NextPage<PageProps> = (props) => {
         </Stack> : null
       }
       <Stack spacing={3}>
-        <Typography component="h1" variant="h3">
-          {post.title}
-        </Typography>
         <Typography variant="subtitle1" color="text.secondary">
           <NoSsr>
             {

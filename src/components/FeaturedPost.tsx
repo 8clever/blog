@@ -26,7 +26,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
           <Typography component="h2" variant="h5">
             {post.title}
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
+          <Typography component="div" variant="subtitle1" color="text.secondary">
             <NoSsr defer>
               {
                 post.dateUpdated ?
@@ -46,6 +46,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
                 sm: "block"
               }
             }}
+            component="h3"
             variant='subtitle1' 
             paragraph>
             {post.description}
@@ -71,7 +72,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
             sm: "none"
           }
         }}>
-          <Typography variant='subtitle1'>
+          <Typography variant='subtitle1' component="h3">
             {post.description}
           </Typography>
         </CardContent>
