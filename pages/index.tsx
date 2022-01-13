@@ -101,7 +101,9 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
 
 const Home: NextPage<PageProps> = (props) => {
   return (
-    <Layout title="Breaking news">
+    <Layout 
+      description='Breaking news'
+      title="Breaking news">
       <Stack spacing={3}>
         {
           props.mainPost &&

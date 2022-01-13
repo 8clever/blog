@@ -26,10 +26,10 @@ const social = [
 ];
 
 const pages = [
-  { name: "Term of use", link: "" },
-  { name: "Help", link: "" },
-  { name: "Etiquette", link: "" },
-  { name: "About us", link: "" },
+  { name: "Term of use", link: "/" },
+  { name: "Help", link: "/" },
+  { name: "Etiquette", link: "/" },
+  { name: "About us", link: "/" },
 ]
 
 const footerBackground = darken(theme.palette.secondary.main, 0.5);
@@ -57,7 +57,7 @@ export default function Footer() {
               <Fab
                 size="small"
                 color="primary"
-                href={"#"}
+                href={"/"}
                 key={network.name}
                 title={network.name}
               >

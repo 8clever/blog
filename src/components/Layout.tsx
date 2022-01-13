@@ -16,6 +16,7 @@ export const Theme: React.FC = (props) => {
 interface LayoutProps {
   children?: React.ReactNode;
   title?: string;
+  description?: string;
 }
 
 export function Layout(props: LayoutProps) {
@@ -26,6 +27,13 @@ export function Layout(props: LayoutProps) {
           <Header title="News" />
           <Container maxWidth="lg">
             <main>
+              {
+                props.description ?
+                <Head>
+                  <meta name="description" content={props.description} />
+                </Head> : 
+                null
+              }
               {
                 props.title ?
                 <>
