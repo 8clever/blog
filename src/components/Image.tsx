@@ -1,27 +1,35 @@
-import { CardMedia } from "@mui/material";
+import { CardMedia, SxProps } from "@mui/material";
+import Head from "next/head";
 
 interface Props {
-  width?: string;
-  height?: string;
   src: string;
   alt: string;
+  sx?: SxProps;
+  preload?: boolean;
 }
 
 export const Image = (props: Props) => {
-  const { src, alt, ...sx } = props;
   return (
-    <CardMedia
-      sx={{ 
-        width: "25vw",
-        height: "25vh",
-        borderRadius: 4,
-        background: `url(${props.src})`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        ...sx
-      }}
-      component="div"
-      aria-label={alt}
-    />
+    <>
+      {
+        props.preload ?
+        <Head>
+          <link rel="preload" as="image" href={props.src} />
+        </Head> : null
+      }
+      <CardMedia
+        component="div"
+        sx={{ 
+          height: {
+            xs: "20vh",
+            sm: "25vh"
+          },
+          background: `url(${props.src})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          ...props.sx
+        }}
+      />
+    </>
   )
 }

@@ -7,7 +7,7 @@ function MarkdownListItem(props: any) {
   return <Box component="li" sx={{ mt: 1, typography: 'body1' }} {...props} />;
 }
 
-const options = {
+const options: MarkdownToJSX.Options = {
   overrides: {
     h1: {
       component: Typography,
@@ -35,7 +35,10 @@ const options = {
     },
     p: {
       component: Typography,
-      props: { paragraph: true },
+      props: { 
+        component: "div",
+        paragraph: true
+      },
     },
     a: { component: Link },
     li: {
@@ -58,5 +61,7 @@ interface MarkdownProps {
 }
 
 export default function Markdown(props: MarkdownProps) {
-  return <ReactMarkdown options={options} {...props} />;
+  return <ReactMarkdown 
+    options={options} 
+    {...props} />;
 }

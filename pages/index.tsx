@@ -110,7 +110,7 @@ const Home: NextPage<PageProps> = (props) => {
         </Box>
         {
           props.mainPost &&
-          <FeaturedPost post={props.mainPost} />
+          <FeaturedPost post={props.mainPost} preload />
         }
         {props.featuredPosts.map((post, idx) => (
           <FeaturedPost key={idx} post={post} />

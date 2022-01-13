@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Typography, Card, CardActionArea, CardContent, Box } from "@mui/material"
+import { Typography, Card, CardActionArea, CardContent, NoSsr } from "@mui/material"
 import { Blog } from './types';
 import { Image } from './Image';
 
 interface FeaturedPostProps {
   post: Blog.Post
+  preload?: boolean;
 }
 
 export default function FeaturedPost(props: FeaturedPostProps) {
@@ -12,32 +13,67 @@ export default function FeaturedPost(props: FeaturedPostProps) {
 
   return (
     <CardActionArea component="a" href={Blog.Post.GetPostUrl(post)}>
-      <Card sx={{ display: 'flex', position: "relative", height: "25vh" }}>
-        <Image src={post.image.url} alt={post.image.label} />
-        <CardContent sx={{ flex: 1, position: "relative" }}>
+      <Card sx={{ 
+        height: {
+          sm: "25vh"
+        },
+        display: {
+          xs: "block",
+          sm: "flex"
+        } 
+      }}>
+        <CardContent sx={{ flex: 1 }}>
           <Typography component="h2" variant="h5">
             {post.title}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
-            {
-              post.dateUpdated ?
-              new Date(post.dateUpdated).toLocaleString() :
+            <NoSsr defer>
+              {
+                post.dateUpdated ?
+                new Date(post.dateUpdated).toLocaleString() :
 
-              post.dateCreated ?
-              new Date(post.dateCreated).toLocaleString() :
+                post.dateCreated ?
+                new Date(post.dateCreated).toLocaleString() :
 
-              null
-            }
+                null
+              }
+            </NoSsr>
           </Typography>
-          <Typography variant="subtitle1" paragraph>
+          <Typography 
+            sx={{
+              display: {
+                xs: "none",
+                sm: "block"
+              }
+            }}
+            variant='subtitle1' 
+            paragraph>
             {post.description}
           </Typography>
-          <Box sx={{ 
-            position: "absolute", 
-            inset: 0, 
-            pointerEvents: "none",
-            background: "linear-gradient(transparent 50%, white)"
-          }} />
+        </CardContent>
+        <Image 
+          preload={props.preload}
+          sx={{
+            order: -1,
+            width: {
+              sm: "25vw"
+            },
+            height: {
+              xs: "20vh",
+              sm: "100%"
+            }
+          }}
+          src={post.image.url} alt={post.image.label} 
+        />
+        <CardContent sx={{
+          display: {
+            xs: "block",
+            sm: "none"
+          }
+        }}>
+          <Typography variant='subtitle1'>
+            {post.description}
+          </Typography>
         </CardContent>
       </Card>
     </CardActionArea>

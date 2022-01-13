@@ -1,5 +1,5 @@
 import { wrap } from "@mikro-orm/core";
-import { Stack, Button, Typography, Card } from "@mui/material";
+import { Stack, Button, Typography, Card, NoSsr } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { DataBase } from "../../server/connectors";
@@ -53,21 +53,24 @@ const PostPage: NextPage<PageProps> = (props) => {
           {post.title}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary">
-          {
-            post.dateUpdated ?
-            new Date(post.dateUpdated).toLocaleString() :
+          <NoSsr>
+            {
+              post.dateUpdated ?
+              new Date(post.dateUpdated).toLocaleString() :
 
-            post.dateCreated ?
-            new Date(post.dateCreated).toLocaleString() :
+              post.dateCreated ?
+              new Date(post.dateCreated).toLocaleString() :
 
-            null
-          }
-        </Typography>
-        <Typography>
-          {post.description}
+              null
+            }
+          </NoSsr>
         </Typography>
         <Card>
-          <Image src={post.image.url} alt={post.image.label} width="100%" height="35vh" />
+          <Image 
+            src={post.image.url} 
+            alt={post.image.label} 
+            preload 
+          />
         </Card>
         <Markdown className="markdown">
           {props.post.post}
