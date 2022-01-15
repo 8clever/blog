@@ -5,6 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { theme } from './theme';
 import Head from 'next/head';
+import LazyHydrate from 'react-lazy-hydration';
 
 export const Theme: React.FC = (props) => {
   return (
@@ -22,35 +23,37 @@ interface LayoutProps {
 
 export function Layout(props: LayoutProps) {
   return (
-    <Theme>
-      <Head>
-        {
-          props.description ?
-          <meta name="description" content={props.description} /> : null
-        }
-        {
-          props.title ?
-          <title>{props.title}</title> : null
-        }
-      </Head>
-      <Stack justifyContent={"space-between"} sx={{ height: "100vh" }}>
-        <Box sx={{ mb: 5 }}>
-          <Header title="News" />
-          <Container maxWidth="lg">
-            <main>
-              {
-                props.title ?
-                <Typography component="h1" variant="h3" sx={{ mb: 3 }}>
-                  {props.title}
-                </Typography>
-                : null
-              }
-              {props.children}
-            </main>
-          </Container>
-        </Box>
-        <Footer />
-      </Stack>
-    </Theme>
+    <LazyHydrate ssrOnly>
+      <Theme>
+        <Head>
+          {
+            props.description ?
+            <meta name="description" content={props.description} /> : null
+          }
+          {
+            props.title ?
+            <title>{props.title}</title> : null
+          }
+        </Head>
+        <Stack justifyContent={"space-between"} sx={{ height: "100vh" }}>
+          <Box sx={{ mb: 5 }}>
+            <Header title="News" />
+            <Container maxWidth="lg">
+              <main>
+                {
+                  props.title ?
+                  <Typography component="h1" variant="h3" sx={{ mb: 3 }}>
+                    {props.title}
+                  </Typography>
+                  : null
+                }
+                {props.children}
+              </main>
+            </Container>
+          </Box>
+          <Footer />
+        </Stack>
+      </Theme>
+    </LazyHydrate>
   );
 }
