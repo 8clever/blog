@@ -1,26 +1,9 @@
 import * as React from 'react';
-import { CssBaseline, Container, Stack, Box, Typography } from "@mui/material"
-import { ThemeProvider } from "@mui/system";
+import { Container, Stack, Box, Typography } from "@mui/material"
 import Header from './Header';
 import Footer from './Footer';
-import { theme } from './theme';
 import Head from 'next/head';
 import LazyHydrate from 'react-lazy-hydration';
-
-/** fonts */
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
-export const Theme: React.FC = (props) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {props.children}
-    </ThemeProvider>
-  )
-}
 interface LayoutProps {
   children?: React.ReactNode;
   title?: string;
@@ -30,7 +13,7 @@ interface LayoutProps {
 export function Layout(props: LayoutProps) {
   return (
     <LazyHydrate whenIdle>
-      <Theme>
+      <>
         <Head>
           {
             props.description ?
@@ -59,7 +42,7 @@ export function Layout(props: LayoutProps) {
           </Box>
           <Footer />
         </Stack>
-      </Theme>
+      </>
     </LazyHydrate>
   );
 }

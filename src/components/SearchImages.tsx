@@ -165,6 +165,7 @@ export const SearchImages = (props: Props) => {
                   }}
                   key={i.id}>
                   <img
+                    alt={i.alt_description}
                     src={i.urls.thumb}
                     loading="lazy"
                   />
