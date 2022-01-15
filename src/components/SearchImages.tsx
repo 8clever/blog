@@ -1,9 +1,12 @@
-import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, ImageList, ImageListItem, Pagination, Tab, Tabs, TextField } from "@mui/material";
 import React from "react";
+
+import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, ImageList, ImageListItem, Pagination, Tab, Tabs, TextField } from "@mui/material";
+
 import { Unsplash } from "../../server/unsplash/types";
 import qs, { ParsedUrlQuery } from 'querystring';
-import { useTheme } from "@mui/material";
 import { Blog } from "./types";
+
+import { theme } from "./theme"
 
 interface Props {
   visible: boolean;
@@ -79,8 +82,6 @@ export const SearchImages = (props: Props) => {
     value,
     page
   ]);
-
-  const theme = useTheme();
 
   return (
     <Dialog fullScreen open={props.visible} onClose={props.toggle}>

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Box, Container, Typography, Link, Stack, Fab, darken } from "@mui/material"
+import { Box, Container, Typography, Link, Stack, Fab } from "@mui/material"
 import { Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
+import { darken } from "@mui/system/colorManipulator";
 import { theme } from './theme';
 
 export function Copyright() {
