@@ -13,7 +13,6 @@ export const Theme: React.FC = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <Head>
-        <link rel="preload" as="style" href={robotoFontUrl} />
         <link rel="stylesheet" href={robotoFontUrl} />
       </Head>
       <CssBaseline />
