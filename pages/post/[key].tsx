@@ -1,5 +1,5 @@
 import { wrap } from "@mikro-orm/core";
-import { Stack, Button, Typography, Card, NoSsr } from "@mui/material";
+import { Stack, Button, Typography, Card } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { DataBase } from "../../server/connectors";
@@ -8,6 +8,7 @@ import Markdown from "../../src/components/Markdown";
 import { Blog } from "../../src/components/types";
 import { useSession } from 'next-auth/react';
 import { Image } from "../../src/components/Image";
+import { PostTime } from "src/components/PostTime";
 
 interface PageProps {
   post: Blog.Post
@@ -52,17 +53,7 @@ const PostPage: NextPage<PageProps> = (props) => {
       }
       <Stack spacing={3}>
         <Typography variant="subtitle1" color="text.secondary" component="div">
-          <NoSsr>
-            {
-              post.dateUpdated ?
-              new Date(post.dateUpdated).toLocaleString() :
-
-              post.dateCreated ?
-              new Date(post.dateCreated).toLocaleString() :
-
-              null
-            }
-          </NoSsr>
+          <PostTime post={post} />
         </Typography>
         <Card>
           <Image 

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Typography, Card, CardActionArea, CardContent, NoSsr } from "@mui/material"
+import { Typography, Card, CardActionArea, CardContent } from "@mui/material"
 import { Blog } from './types';
 import { Image } from './Image';
+import { PostTime } from './PostTime';
 
 interface FeaturedPostProps {
   post: Blog.Post
@@ -27,17 +28,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
             {post.title}
           </Typography>
           <Typography component="div" variant="subtitle1" color="text.secondary">
-            <NoSsr defer>
-              {
-                post.dateUpdated ?
-                new Date(post.dateUpdated).toLocaleString() :
-
-                post.dateCreated ?
-                new Date(post.dateCreated).toLocaleString() :
-
-                null
-              }
-            </NoSsr>
+            <PostTime post={post} />
           </Typography>
           <Typography 
             sx={{
