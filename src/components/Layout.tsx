@@ -7,6 +7,12 @@ import { theme } from './theme';
 import Head from 'next/head';
 import LazyHydrate from 'react-lazy-hydration';
 
+/** fonts */
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 export const Theme: React.FC = (props) => {
   return (
     <ThemeProvider theme={theme}>
