@@ -53,6 +53,5 @@ module.exports = (api) => {
     ],);
   }
 
-  console.log(plugins)
   return { presets, plugins };
 };
