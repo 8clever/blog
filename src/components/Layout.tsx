@@ -29,7 +29,7 @@ interface LayoutProps {
 
 export function Layout(props: LayoutProps) {
   return (
-    <LazyHydrate on="mousemove">
+    <LazyHydrate whenIdle>
       <Theme>
         <Head>
           {
