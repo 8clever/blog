@@ -12,9 +12,7 @@ const robotoFontUrl = "https://fonts.googleapis.com/css?family=Roboto:300,400,50
 export const Theme: React.FC = (props) => {
   return (
     <ThemeProvider theme={theme}>
-      <Head>
-        <link rel="stylesheet" href={robotoFontUrl} />
-      </Head>
+      <link rel="stylesheet" href={robotoFontUrl}/>
       <CssBaseline />
       {props.children}
     </ThemeProvider>
