@@ -7,9 +7,15 @@ import { theme } from './theme';
 import Head from 'next/head';
 import LazyHydrate from 'react-lazy-hydration';
 
+const robotoFontUrl = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
+
 export const Theme: React.FC = (props) => {
   return (
     <ThemeProvider theme={theme}>
+      <Head>
+        <link rel="preload" as="style" href={robotoFontUrl} />
+        <link rel="stylesheet" href={robotoFontUrl} />
+      </Head>
       <CssBaseline />
       {props.children}
     </ThemeProvider>
