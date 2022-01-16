@@ -18,16 +18,15 @@ export const Image = (props: Props) => {
         </Head> : null
       }
       <CardMedia
-        component="div"
+        component="img"
+        src={props.src}
+        alt={props.alt}
         sx={{ 
           height: {
             xs: "200px",
             sm: "250px",
             md: "300px"
           },
-          background: `url(${props.src})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
           ...props.sx
         }}
       />

@@ -31,7 +31,7 @@ export function Layout(props: LayoutProps) {
             </LazyHydrate>
             <LazyHydrate>
               <Container maxWidth="lg">
-                <main>
+                <article>
                   {
                     props.title ?
                     <Typography component="h1" variant="h3" sx={{ mb: 3 }}>
@@ -40,7 +40,7 @@ export function Layout(props: LayoutProps) {
                     : null
                   }
                   {props.children}
-                </main>
+                </article>
               </Container>
             </LazyHydrate>
           </Box>
