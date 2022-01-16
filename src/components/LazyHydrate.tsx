@@ -2,14 +2,37 @@
 import React from "react";
 import Lazy, { LazyProps } from "react-lazy-hydration";
 
-const hydrate = (deadline: IdleDeadline, cb: (value?: null) => void) => {
-  if (deadline.timeRemaining() > 40) {
+/** polyfill */
+if (
+  typeof window !== "undefined" &&
+  typeof requestIdleCallback === "undefined") {
+  /** @ts-ignore */
+  window.requestIdleCallback = function (cb) {
+    var start = Date.now();
+    return setTimeout(function () {
+      cb({
+        didTimeout: false,
+        timeRemaining: function () {
+          return Math.max(0, 50 - (Date.now() - start));
+        }
+      });
+    }, 1);
+  }
+}
+
+export const lazy = (cb: (value?: null) => void, deadline?: IdleDeadline) => {
+  if (typeof requestIdleCallback === "undefined") {
+    setTimeout(cb, 4000);
+    return;
+  }
+
+  if (deadline && deadline.timeRemaining() > 40) {
     cb();
     return;
   }
 
   requestIdleCallback(deadline => {
-    hydrate(deadline, cb);
+    lazy(cb, deadline);
   });
 }
 
@@ -18,16 +41,7 @@ export const LazyHydrate = (props: LazyProps) => {
     <Lazy 
       {...props} 
       noWrapper
-      promise={new Promise(cb => {
-        if (typeof requestIdleCallback === "undefined") {
-          setTimeout(cb, 4000);
-          return;
-        }
-        
-        requestIdleCallback(deadline => {
-          hydrate(deadline, cb)
-        });
-      })}
+      promise={new Promise(res => lazy(res))}
     />
   )
 }
