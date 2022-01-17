@@ -24,7 +24,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
           } 
         }}>
         <CardContent sx={{ flex: 1 }}>
-          <Typography variant="h5">
+          <Typography variant="h5" component="h2">
             {post.title}
           </Typography>
           <Typography
