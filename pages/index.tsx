@@ -2,13 +2,13 @@ import { wrap } from '@mikro-orm/core'
 import { Pagination, Stack } from '@mui/material'
 import type { GetServerSideProps, NextPage } from 'next'
 import { ParsedUrlQuery } from 'querystring'
+import { StructuredData } from 'src/components/StructuredData'
 import { DataBase } from '../server/connectors'
 import FeaturedPost from '../src/components/FeaturedPost'
 import { Layout, LayoutHeader } from '../src/components/Layout'
-import { Blog } from '../src/components/types'
+import { Blog, WebSite } from '../src/components/types'
 
 interface PageProps {
-  mainPost?: Blog.Post;
   featuredPosts: Blog.Post[];
   total: number;
   totalPages: number;
@@ -88,12 +88,11 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
     return wrap(post).toJSON() as Blog.Post;
   });
 
-  const { total: [ total ], data: [ mainPost = null, ...featuredPosts ] } = raw;
+  const { total: [ total ], data } = raw;
 
   return {
     props: {
-      featuredPosts,
-      mainPost,
+      featuredPosts: data,
       ...total
     }
   }
@@ -103,21 +102,41 @@ const title = "Breaking News"
 
 const Home: NextPage<PageProps> = (props) => {
   
-  
   return (
     <Layout 
       description={title}
       title={title}>
+      <StructuredData 
+        thing={{
+          "@context":"https://schema.org",
+          "@type":"ItemList",
+          "itemListElement": props.featuredPosts.map((p,idx) => {
+            return {
+              "@type":"ListItem",
+              "position": idx + 1,
+              "url": WebSite.Domain + Blog.Post.GetPostUrl(p)
+            }
+          })
+        }}
+      />
+      <StructuredData 
+        thing={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": WebSite.Domain,
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": WebSite.Domain + "/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }}
+      />
       <LayoutHeader>
         {title}
       </LayoutHeader>
       <Stack spacing={3}>
-        {
-          props.mainPost &&
-          <FeaturedPost post={props.mainPost} preload />
-        }
         {props.featuredPosts.map((post, idx) => (
-          <FeaturedPost key={idx} post={post} />
+          <FeaturedPost key={idx} post={post} preload={idx === 0} />
         ))}
         <Pagination 
           count={props.totalPages}
