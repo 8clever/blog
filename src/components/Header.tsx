@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Toolbar, Button, Typography, Link, AppBar, Box, Container } from "@mui/material"
 import { signIn, signOut, useSession } from "next-auth/react";
+import { WebSite } from './types';
 interface HeaderProps {
 }
 
@@ -40,7 +41,7 @@ export default function Header(props: HeaderProps) {
               sx={{ flex: 1 }}
             > 
               <Link href="/" underline='none'>
-                News
+                {WebSite.Name}
               </Link>
             </Typography>
             {

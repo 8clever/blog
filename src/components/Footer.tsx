@@ -3,6 +3,7 @@ import { Box, Container, Typography, Link, Stack, Fab } from "@mui/material"
 import { Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
 import { darken } from "@mui/system/colorManipulator";
 import { theme } from './theme';
+import { WebSite } from './types';
 
 export function Copyright() {
   return (
@@ -12,8 +13,8 @@ export function Copyright() {
       color={theme.palette.secondary.contrastText}
       align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href={WebSite.Domain}>
+        {WebSite.Name}
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -27,10 +28,7 @@ const social = [
 ];
 
 const pages = [
-  { name: "Term of use", link: "/" },
-  { name: "Help", link: "/" },
-  { name: "Etiquette", link: "/" },
-  { name: "About us", link: "/" },
+  { name: "Privacy Policy", link: "/" }
 ]
 
 const footerBackground = darken(theme.palette.secondary.main, 0.5);

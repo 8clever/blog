@@ -44,7 +44,7 @@ export namespace User {
 }
 
 export class WebSite {
-  public static Domain = "https://blog.calcio-napoli.com"
+  public static Domain = "https://taketopnews.com"
 
-  public static Name = "News"
+  public static Name = "Take Top News"
 }
