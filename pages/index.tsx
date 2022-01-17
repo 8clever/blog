@@ -4,7 +4,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { DataBase } from '../server/connectors'
 import FeaturedPost from '../src/components/FeaturedPost'
-import { Layout } from '../src/components/Layout'
+import { Layout, LayoutHeader } from '../src/components/Layout'
 import { Blog } from '../src/components/types'
 
 interface PageProps {
@@ -99,11 +99,18 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
   }
 }
 
+const title = "Breaking News"
+
 const Home: NextPage<PageProps> = (props) => {
+  
+  
   return (
     <Layout 
-      description='Breaking news'
-      title="Breaking news">
+      description={title}
+      title={title}>
+      <LayoutHeader>
+        {title}
+      </LayoutHeader>
       <Stack spacing={3}>
         {
           props.mainPost &&

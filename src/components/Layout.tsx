@@ -4,6 +4,21 @@ import Header from './Header';
 import Footer from './Footer';
 import Head from 'next/head';
 import { LazyHydrate } from './LazyHydrate';
+
+interface LayoutHeaderProps {
+}
+
+export const LayoutHeader: React.FC<LayoutHeaderProps> = function LayoutHeader (props) {
+  return (
+    <Typography
+      component="h1" 
+      variant="h3" 
+      sx={{ mb: 3 }}>
+      {props.children}
+    </Typography>
+  )
+}
+
 interface LayoutProps {
   children?: React.ReactNode;
   title?: string;
@@ -27,20 +42,11 @@ export function Layout(props: LayoutProps) {
         <Stack justifyContent={"space-between"} sx={{ height: "100vh" }}>
           <Box sx={{ mb: 5 }}>
             <LazyHydrate>
-              <Header title="News" />
+              <Header />
             </LazyHydrate>
             <LazyHydrate>
               <Container maxWidth="lg">
-                <article>
-                  {
-                    props.title ?
-                    <Typography component="h1" variant="h3" sx={{ mb: 3 }}>
-                      {props.title}
-                    </Typography>
-                    : null
-                  }
-                  {props.children}
-                </article>
+                {props.children}
               </Container>
             </LazyHydrate>
           </Box>

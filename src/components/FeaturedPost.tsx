@@ -15,20 +15,19 @@ export default function FeaturedPost(props: FeaturedPostProps) {
   return (
     <CardActionArea component="a" href={Blog.Post.GetPostUrl(post)}>
       <Card component="article" sx={{ 
-        height: {
-          sm: "200px"
-        },
-        display: {
-          xs: "block",
-          sm: "flex"
-        } 
-      }}>
+          height: {
+            sm: "200px"
+          },
+          display: {
+            xs: "block",
+            sm: "flex"
+          } 
+        }}>
         <CardContent sx={{ flex: 1 }}>
-          <Typography component="h2" variant="h5">
+          <Typography variant="h5">
             {post.title}
           </Typography>
-          <Typography 
-            dateTime={new Date(post.dateUpdated || post.dateCreated || new Date()).toJSON()}
+          <Typography
             component="time" 
             variant="subtitle1" 
             color="text.secondary">

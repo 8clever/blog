@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Toolbar, Button, Typography, Link, AppBar, Box, Container } from "@mui/material"
 import { signIn, signOut, useSession } from "next-auth/react";
 interface HeaderProps {
-  title: string;
 }
 
 interface RootSection {
@@ -13,8 +12,6 @@ interface RootSection {
 const rootSections: RootSection[] = [];
 
 export default function Header(props: HeaderProps) {
-  const { title } = props;
-
   const { status } = useSession();
 
   const sections = React.useMemo(() => {
@@ -43,7 +40,7 @@ export default function Header(props: HeaderProps) {
               sx={{ flex: 1 }}
             > 
               <Link href="/" underline='none'>
-                {title}
+                News
               </Link>
             </Typography>
             {

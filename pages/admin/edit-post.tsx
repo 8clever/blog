@@ -1,11 +1,11 @@
 import { wrap } from "@mikro-orm/core"
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, TextField, Typography } from "@mui/material"
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, TextField } from "@mui/material"
 import { Image as ImageIcon } from "@mui/icons-material"
 import { GetServerSideProps, NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
 import React from "react"
 import { DataBase } from "../../server/connectors"
-import { Layout } from "../../src/components/Layout"
+import { Layout, LayoutHeader } from "../../src/components/Layout"
 import { SearchImages } from "../../src/components/SearchImages"
 import { Blog } from "../../src/components/types"
 
@@ -54,9 +54,9 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
   return (
     <Layout>
       <Stack direction={"column"} spacing={1}>
-        <Typography variant="h4">
+        <LayoutHeader>
           Edit featured post
-        </Typography>
+        </LayoutHeader>
         <Stack direction="row" gap={1} justifyContent="end">
           <Button 
             variant="contained"

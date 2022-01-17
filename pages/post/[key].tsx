@@ -3,7 +3,7 @@ import { Stack, Button, Typography, Card } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { DataBase } from "../../server/connectors";
-import { Layout } from "../../src/components/Layout";
+import { Layout, LayoutHeader } from "../../src/components/Layout";
 import Markdown from "../../src/components/Markdown";
 import { Blog } from "../../src/components/types";
 import { useSession } from 'next-auth/react';
@@ -43,6 +43,7 @@ const PostPage: NextPage<PageProps> = (props) => {
     <Layout
       description={post.description}
       title={post.title}>
+      <LayoutHeader>{post.title}</LayoutHeader>
       {
         status === "authenticated" ?
         <Stack direction={"row"} gap={1} justifyContent={"end"} sx={{ mb: 1 }}>
