@@ -5,10 +5,11 @@ import { ParsedUrlQuery } from "querystring";
 import { DataBase } from "../../server/connectors";
 import { Layout, LayoutHeader } from "../../src/components/Layout";
 import Markdown from "../../src/components/Markdown";
-import { Blog } from "../../src/components/types";
+import { Blog, WebSite } from "../../src/components/types";
 import { useSession } from 'next-auth/react';
 import { Image } from "../../src/components/Image";
 import { PostTime } from "src/components/PostTime";
+import { StructuredData } from "src/components/StructuredData";
 
 interface PageProps {
   post: Blog.Post
@@ -43,6 +44,33 @@ const PostPage: NextPage<PageProps> = (props) => {
     <Layout
       description={post.description}
       title={post.title}>
+      <StructuredData thing={{
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": post.title,
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": WebSite.Domain + Blog.Post.GetPostUrl(post)
+        },
+        "image": [
+          post.image.url
+        ],
+        "datePublished": post.dateCreated ? new Date(post.dateCreated).toJSON() : undefined,
+        "dateModified": post.dateUpdated ? new Date(post.dateUpdated).toJSON() : undefined,
+        "publisher": {
+          "@type": "Organization",
+          "name": WebSite.Name,
+          "logo": {
+            "@type": "ImageObject",
+            "url": WebSite.Domain + "/favicon.ico"
+          }
+        },
+        "author": {
+          "@type": "Person",
+          "name": WebSite.Name,
+          "url": WebSite.Domain
+        }
+      }} />
       <LayoutHeader>{post.title}</LayoutHeader>
       {
         status === "authenticated" ?
