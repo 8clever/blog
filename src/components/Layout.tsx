@@ -25,6 +25,7 @@ interface LayoutProps {
   children?: React.ReactNode;
   title?: string;
   description?: string;
+  image?: string;
 }
 
 export function Layout(props: LayoutProps) {
@@ -35,14 +36,30 @@ export function Layout(props: LayoutProps) {
     <LazyHydrate>
       <>
         <Head>
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@TakeTopNews" />
+          <meta name="twitter:creator" content="@godofluck89" />
+          <meta property="og:url" content={WebSite.Domain + router.asPath} />
+          <meta property="og:type" content="website" />
           <link rel="canonical" href={WebSite.Domain + router.asPath} />
           {
+            props.image ?
+            <meta property="og:image" content={props.image} /> : null
+          }
+          {
             props.description ?
-            <meta name="description" content={props.description} /> : null
+            <>
+              <meta name="description" content={props.description} />
+              <meta property="og:description" content={props.description} />
+            </>
+            : null
           }
           {
             props.title ?
-            <title>{props.title}</title> : null
+            <>
+              <title>{props.title}</title>
+              <meta property="og:title" content={props.title} />
+            </> : null
           }
         </Head>
         <Stack justifyContent={"space-between"} sx={{ height: "100vh" }}>

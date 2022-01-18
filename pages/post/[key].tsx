@@ -42,6 +42,7 @@ const PostPage: NextPage<PageProps> = (props) => {
 
   return (
     <Layout
+      image={post.image.url}
       description={post.description}
       title={post.title}>
       <StructuredData thing={{

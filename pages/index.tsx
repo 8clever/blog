@@ -101,7 +101,8 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
 const Home: NextPage<PageProps> = (props) => {
   
   return (
-    <Layout 
+    <Layout
+      image={props.featuredPosts[0]?.image.url}
       description={WebSite.Name + " is a network about all trend news in the world. Games, popular trends, inside information. All what you want in one place."}
       title={WebSite.Name + ", breaking news, trend news, popular news, global news"}>
       <StructuredData 
