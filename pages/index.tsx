@@ -98,14 +98,12 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
   }
 }
 
-const title = "Breaking News"
-
 const Home: NextPage<PageProps> = (props) => {
   
   return (
     <Layout 
-      description={title}
-      title={title}>
+      description={"Take top news, breaking news, important news, best news ever."}
+      title={WebSite.Name}>
       <StructuredData 
         thing={{
           "@context":"https://schema.org",
@@ -132,7 +130,7 @@ const Home: NextPage<PageProps> = (props) => {
         }}
       />
       <LayoutHeader>
-        {title}
+        Breaking news
       </LayoutHeader>
       <Stack spacing={3}>
         {props.featuredPosts.map((post, idx) => (
