@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { ResponseError, ResponseSuccess } from "../../src/api";
+import { ResponseError, ResponseSuccess } from "src/api";
 
 export class FactoryEndpoint {
+
+  method: "POST" | "GET" = "POST"
 
   async main (req: NextApiRequest, res: NextApiResponse): Promise<any> {
 
@@ -9,8 +11,8 @@ export class FactoryEndpoint {
 
   handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-      if (req.method !== 'POST') {
-        throw new Error("Only POST method available")
+      if (req.method !== this.method) {
+        throw new Error(`Only ${this.method} method available`)
       }
       const dto = await this.main(req, res);
       const response: ResponseSuccess<typeof dto> = {

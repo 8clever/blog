@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { rootConfig } from "../../../rootConfig";
+import { rootConfig } from "rootConfig";
 
 export default NextAuth({
   pages: {

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, ImageList, ImageListItem, Pagination, Tab, Tabs, TextField } from "@mui/material";
 
-import { Unsplash } from "../../server/unsplash/types";
+import { Unsplash } from "server/unsplash/types";
 import qs, { ParsedUrlQuery } from 'querystring';
 import { Blog } from "./types";
 

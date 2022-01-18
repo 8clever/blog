@@ -1,4 +1,4 @@
-import { rootConfig } from "../../rootConfig";
+import { rootConfig } from "rootConfig";
 import qs from 'querystring';
 import { Unsplash as Type} from "./types"
 

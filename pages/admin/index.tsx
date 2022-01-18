@@ -1,5 +1,5 @@
 import { Button, Card, CardActions, CardContent, Typography } from "@mui/material";
-import { Layout } from "../../src/components/Layout";
+import { Layout } from "src/components/Layout";
 
 const adminUrls = [
   {

@@ -1,7 +1,7 @@
 import { NextApiRequest } from "next"
 import { getToken } from "next-auth/jwt"
 import { NextResponse } from "next/server"
-import { rootConfig } from "../../rootConfig";
+import { rootConfig } from "rootConfig";
 
 /** middlewares can access env only with direct access pattern */
 export const secureMiddleware = async (req: NextApiRequest) => {

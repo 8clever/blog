@@ -1,6 +1,6 @@
 import { Entity, PrimaryKey, Property, Unique } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
-import { Blog } from '../../src/components/types';
+import { Blog } from 'src/components/types';
 import { Image } from './Image';
 
 @Entity()

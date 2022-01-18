@@ -2,12 +2,12 @@ import { wrap } from "@mikro-orm/core";
 import { Stack, Button, Typography, Card } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { DataBase } from "../../server/connectors";
-import { Layout, LayoutHeader } from "../../src/components/Layout";
-import Markdown from "../../src/components/Markdown";
-import { Blog, WebSite } from "../../src/components/types";
+import { DataBase } from "server/connectors";
+import { Layout, LayoutHeader } from "src/components/Layout";
+import Markdown from "src/components/Markdown";
+import { Blog, WebSite } from "src/components/types";
 import { useSession } from 'next-auth/react';
-import { Image } from "../../src/components/Image";
+import { Image } from "src/components/Image";
 import { PostTime } from "src/components/PostTime";
 import { StructuredData } from "src/components/StructuredData";
 

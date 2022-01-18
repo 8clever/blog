@@ -4,10 +4,10 @@ import { Image as ImageIcon } from "@mui/icons-material"
 import { GetServerSideProps, NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
 import React from "react"
-import { DataBase } from "../../server/connectors"
-import { Layout, LayoutHeader } from "../../src/components/Layout"
-import { SearchImages } from "../../src/components/SearchImages"
-import { Blog } from "../../src/components/types"
+import { DataBase } from "server/connectors"
+import { Layout, LayoutHeader } from "src/components/Layout"
+import { SearchImages } from "src/components/SearchImages"
+import { Blog } from "src/components/types"
 
 interface PageProps {
   post?: Blog.Post
