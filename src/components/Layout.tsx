@@ -4,6 +4,8 @@ import Header from './Header';
 import Footer from './Footer';
 import Head from 'next/head';
 import { LazyHydrate } from './LazyHydrate';
+import { useRouter } from 'next/router';
+import { WebSite } from './types';
 
 interface LayoutHeaderProps {
 }
@@ -26,10 +28,14 @@ interface LayoutProps {
 }
 
 export function Layout(props: LayoutProps) {
+
+  const router = useRouter();
+
   return (
     <LazyHydrate>
       <>
         <Head>
+          <link rel="canonical" href={WebSite.Domain + router.asPath} />
           {
             props.description ?
             <meta name="description" content={props.description} /> : null
