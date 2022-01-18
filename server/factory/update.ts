@@ -1,15 +1,18 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { ObjectId } from "@mikro-orm/mongodb";
 import { DataBase } from "../connectors";
-import { EntityName, wrap } from "@mikro-orm/core";
+import { wrap } from "@mikro-orm/core";
 import { FactoryEndpoint } from ".";
+import { EntityClass } from "@mikro-orm/core/typings";
 
 export class UpdateEndpoint<T> extends FactoryEndpoint {
   constructor (
-    private entity: EntityName<T>
+    private entity: EntityClass<T>
   ) {
     super()
   }
+
+  async validate (item: Awaited<T>) {}
 
   async main (req: NextApiRequest, res: NextApiResponse<any>) {
     const db = new DataBase();
@@ -31,7 +34,10 @@ export class UpdateEndpoint<T> extends FactoryEndpoint {
     }
     
     wrap(item).assign(dto);
+    
+    await this.validate(item);
     await db.orm.em.persistAndFlush(item);
+
     return wrap(item).toJSON();
   }
 }

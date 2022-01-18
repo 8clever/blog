@@ -1,7 +1,7 @@
 import { Entity, PrimaryKey, Property, Unique } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
-import { Blog } from 'src/components/types';
 import { Image } from './Image';
+import { Blog } from 'src/components/types';
 
 @Entity()
 export class Post implements Blog.Post {

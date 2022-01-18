@@ -17,7 +17,7 @@ export namespace Blog {
     
     dateCreated?: number;
     dateUpdated?: number;
-  
+
     public static GetPostUrl = (post: Post) => {
       return `/post/${post.key}`
     }
@@ -30,6 +30,15 @@ export namespace Blog {
     public static Delete = async (post: Post) => {
       const api = new Api("/api/secure/post/delete");
       await api.post(post);
+    }
+
+    public static Validate = (post: Post) => {
+      if (post.title.length < Config.Title.Min || post.title.length > Config.Title.Max) {
+        throw new Error(`Invalid legth of title. Min: ${Config.Title.Min}, Max: ${Config.Title.Max}, Current: ${post.title.length}`)
+      }
+      if (post.description.length < Config.Description.Min || post.description.length > Config.Description.Max) {
+        throw new Error(`Invalid legth of description. Min: ${Config.Description.Min}, Max: ${Config.Description.Max}, Current: ${post.description.length}`)
+      }
     }
   }
 
