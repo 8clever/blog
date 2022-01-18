@@ -17,7 +17,7 @@ export default function Header(props: HeaderProps) {
       <AppBar position='relative' color='transparent'>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
-            <Image 
+            <Image
               src={"/mipmap-hdpi/ic_ttn.png"}
               alt={WebSite.Name}
               sx={{
