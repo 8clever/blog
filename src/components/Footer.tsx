@@ -28,7 +28,7 @@ const social = [
 ];
 
 const pages = [
-  { name: "Privacy Policy", link: "/privacypolicy.html" }
+  { name: "Privacy Policy", link: "/privacypolicy" }
 ]
 
 const footerBackground = darken(theme.palette.secondary.main, 0.5);
