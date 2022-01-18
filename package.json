@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon",
-    "build": "next build && tsc --project tsconfig.server.json",
+    "build": "rm -rf dist && next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/server/index.js",
     "lint": "next lint",
     "mongo": "docker-compose up mongo"
