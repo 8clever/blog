@@ -102,8 +102,8 @@ const Home: NextPage<PageProps> = (props) => {
   
   return (
     <Layout 
-      description={"Take top news, breaking news, important news, best news ever."}
-      title={WebSite.Name}>
+      description={WebSite.Name + " is a network about all trend news in the world. Games, popular trends, inside information. All what you want in one place."}
+      title={WebSite.Name + ", breaking news, trend news, popular news, global news"}>
       <StructuredData 
         thing={{
           "@context":"https://schema.org",

@@ -32,6 +32,17 @@ export namespace Blog {
       await api.post(post);
     }
   }
+
+  export namespace Config {
+    export class Title {
+      public static Min = 50
+      public static Max = 70
+    }
+    export class Description {
+      public static Min = 110;
+      public static Max = 160;
+    }
+  }
 }
 
 export namespace User {
