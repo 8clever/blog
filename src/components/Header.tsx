@@ -3,6 +3,7 @@ import { Toolbar, Button, Typography, Link, AppBar, Box, Container, Avatar, Menu
 import { signIn, signOut, useSession } from "next-auth/react";
 import { WebSite } from './types';
 import { Add, Login, Logout } from '@mui/icons-material';
+import { Image } from './Image';
 interface HeaderProps {
 }
 
@@ -12,10 +13,19 @@ export default function Header(props: HeaderProps) {
   const [ menuAnchor, setMenuAnchor ] = React.useState<HTMLElement | null>(null);
 
   return (
-    <Box sx={{ mb: 5 }}>
+    <Box sx={{ mb: 3 }}>
       <AppBar position='relative' color='transparent'>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
+            <Image 
+              src={"/mipmap-hdpi/ic_ttn.png"}
+              alt={WebSite.Name}
+              sx={{
+                height: 40,
+                width: 40,
+                mr: 1
+              }}
+            />
             <Typography
               component="h2"
               variant="h5"
