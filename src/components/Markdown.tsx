@@ -2,6 +2,7 @@ import * as React from 'react';
 import ReactMarkdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import { Typography, Link, Box } from "@mui/material";
 import { Image } from './Image';
+import { YtVideo } from "./YtVideo"
 
 function MarkdownListItem(props: any) {
   return <Box component="li" sx={{ mt: 1, typography: 'body1' }} {...props} />;
@@ -53,7 +54,8 @@ const options: MarkdownToJSX.Options = {
           height: "100%"
         }
       }
-    }
+    },
+    YtVideo
   },
 };
 

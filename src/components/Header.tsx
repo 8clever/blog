@@ -15,7 +15,7 @@ export default function Header(props: HeaderProps) {
   return (
     <Box sx={{ mb: 3 }}>
       <AppBar position='relative' color='transparent'>
-        <Container maxWidth="lg">
+        <Container maxWidth="md">
           <Toolbar disableGutters>
             <Image
               src={"/mipmap-hdpi/ic_ttn.png"}

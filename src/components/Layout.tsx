@@ -68,7 +68,7 @@ export function Layout(props: LayoutProps) {
               <Header />
             </LazyHydrate>
             <LazyHydrate>
-              <Container maxWidth="lg">
+              <Container maxWidth={"md"}>
                 {props.children}
               </Container>
             </LazyHydrate>
