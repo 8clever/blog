@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Container, Typography, Link, Stack, Fab } from "@mui/material"
-import { Facebook as FacebookIcon, Twitter as TwitterIcon } from "@mui/icons-material"
+import { Twitter as TwitterIcon } from "@mui/icons-material"
 import { darken } from "@mui/system/colorManipulator";
 import { theme } from './theme';
 import { WebSite } from './types';
@@ -23,12 +23,11 @@ export function Copyright() {
 }
 
 const social = [
-  { name: 'Twitter', icon: TwitterIcon },
-  { name: 'Facebook', icon: FacebookIcon }
+  { name: 'Twitter', icon: TwitterIcon, url: "https://twitter.com/taketopnews" }
 ];
 
 const pages = [
-  { name: "Privacy Policy", link: "/privacypolicy" }
+  { name: "Privacy Policy", url: "/privacypolicy" }
 ]
 
 const footerBackground = darken(theme.palette.secondary.main, 0.5);
@@ -43,7 +42,7 @@ export default function Footer() {
               return (
                 <Link 
                   color={theme.palette.secondary.contrastText}
-                  href={p.link} 
+                  href={p.url} 
                   key={p.name} 
                   underline='none'>
                   {p.name}
@@ -56,7 +55,7 @@ export default function Footer() {
               <Fab
                 size="small"
                 color="primary"
-                href={"/"}
+                href={network.url}
                 key={network.name}
                 title={network.name}
               >
