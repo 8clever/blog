@@ -1,6 +1,6 @@
 import { wrap } from "@mikro-orm/core"
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, TextField } from "@mui/material"
-import { Image as ImageIcon } from "@mui/icons-material"
+import { Image as ImageIcon, YouTube } from "@mui/icons-material"
 import { GetServerSideProps, NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
 import React from "react"
@@ -163,6 +163,20 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
           }}
         />
         <Stack direction="row" gap={1} justifyContent="end">
+          <Button 
+            onClick={() => {
+              const text = [ 
+                post.post, 
+                `<YtVideo id="DHvZLI7Db8E" />`
+              ]
+              setPost({
+                ...post,
+                post: text.join("\n")
+              })
+            }}
+            size="small">
+            <YouTube />
+          </Button>
           <Button 
             onClick={() => setVisibleImageSearchFormText(true)}
             size="small">
