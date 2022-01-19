@@ -108,9 +108,10 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
           </Dialog>
         </Stack>
         <TextField 
+          variant="standard"
           required
           fullWidth
-          label="Ключ"
+          label="Key"
           value={post.key}
           onChange={e => {
             setPost({
@@ -120,9 +121,10 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
           }}
         />
         <TextField 
+          variant="standard"
           required
           fullWidth
-          label="Заголовок"
+          label={`Title ${post.title.length}`}
           value={post.title}
           onChange={e => {
             setPost({
@@ -132,7 +134,6 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
           }}
         />
         <Button 
-          variant="outlined"
           onClick={() => setVisibleImageSearch(true)}>
           Photo: {post.image.label} by {post.image.author}
         </Button>
@@ -147,10 +148,11 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
           }}
         />
         <TextField 
+          variant="standard"
           required
           fullWidth
           type="text"
-          label="Описание"
+          label={`Description ${post.description.length}`}
           multiline
           rows={4}
           value={post.description}
@@ -164,7 +166,7 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
         <Stack direction="row" gap={1} justifyContent="end">
           <Button 
             onClick={() => setVisibleImageSearchFormText(true)}
-            size="small" variant="outlined">
+            size="small">
             <ImageIcon />
           </Button>
           <SearchImages 
@@ -185,12 +187,12 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
             />
         </Stack>
         <TextField 
+          variant="standard"
           required
           fullWidth
           type="text"
-          label="Текст (MD)"
+          label="Text (MD)"
           multiline
-          rows={50}
           value={post.post}
           onChange={e => {
             setPost({

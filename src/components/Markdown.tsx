@@ -47,8 +47,9 @@ const options: MarkdownToJSX.Options = {
     img: { 
       component: Image,
       props: {
+        lazy: true,
         width: "100%",
-        height: "35vh"
+        height: "100%"
       }
     }
   },
