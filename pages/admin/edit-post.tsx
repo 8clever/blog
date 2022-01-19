@@ -154,7 +154,6 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
           type="text"
           label={`Description ${post.description.length}`}
           multiline
-          rows={4}
           value={post.description}
           onChange={e => {
             setPost({
