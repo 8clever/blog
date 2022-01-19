@@ -26,7 +26,7 @@ export const lazy = (cb: (value?: null) => void, deadline?: IdleDeadline) => {
     return;
   }
 
-  if (deadline && deadline.timeRemaining() > 40) {
+  if (deadline && deadline.timeRemaining() > 45) {
     cb();
     return;
   }
