@@ -6,7 +6,6 @@ interface Props {
   alt: string;
   sx?: SxProps;
   preload?: boolean;
-  lazy?: boolean;
 }
 
 export const Image = (props: Props) => {
@@ -23,9 +22,9 @@ export const Image = (props: Props) => {
         src={props.src}
         alt={props.alt}
         loading={
-          props.lazy ?
-          "lazy" :
-          "eager"
+          props.preload ?
+          "eager" :
+          "lazy"
         }
         sx={{ 
           height: {

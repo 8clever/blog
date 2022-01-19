@@ -34,8 +34,7 @@ export const YtVideo = (props: IProps) => {
           frameBorder="0"
         /> :
         <Card sx={{ position: "relative", height }}>
-          <Image 
-            lazy
+          <Image
             sx={{
               height
             }}
