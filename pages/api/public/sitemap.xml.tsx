@@ -18,6 +18,7 @@ export const item = (path: string = "", changefreq: "hourly" | "weekly" | "daily
     <url>
       <loc>${WebSite.Domain + path}</loc>
       <changefreq>${changefreq}</changefreq>
+      <priority>1</priority>
     </url>
     `
   )
