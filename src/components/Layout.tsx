@@ -3,7 +3,7 @@ import { Container, Stack, Box, Typography } from "@mui/material"
 import Header from './Header';
 import Footer from './Footer';
 import Head from 'next/head';
-import { LazyHydrate } from './LazyHydrate';
+import { lazy, LazyHydrate } from './LazyHydrate';
 import { useRouter } from 'next/router';
 import { WebSite } from './types';
 
@@ -26,11 +26,42 @@ interface LayoutProps {
   title?: string;
   description?: string;
   image?: string;
+  ad?: boolean;
 }
 
 export function Layout(props: LayoutProps) {
 
   const router = useRouter();
+
+  React.useEffect(() => {
+    if (!props.ad) return;
+    
+    lazy(() => {
+      if (typeof document === "undefined") return;
+      const $script = document.createElement("script");
+      $script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7579927697787840";
+      $script.crossOrigin = "anonymous"
+      document.head.appendChild($script);
+    });
+    
+    lazy(() => {
+      const id = "G-B4DL20J97K"; 
+      if (typeof window === "undefined") return;
+    
+      /** @ts-ignore */
+      window.dataLayer = window.dataLayer || [];
+      /** @ts-ignore */
+      function gtag(){dataLayer.push(arguments);}
+      /** @ts-ignore */
+      gtag('js', new Date());
+      /** @ts-ignore */
+      gtag('config', id);
+    
+      const $script = document.createElement("script");
+      $script.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+      document.head.appendChild($script);
+    });
+  }, [ props.ad ]);
 
   return (
     <LazyHydrate>
