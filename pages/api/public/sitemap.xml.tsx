@@ -12,36 +12,58 @@ export const container = (body: string) => {
   )
 }
 
-export const item = (path: string = "", changefreq: "hourly" | "weekly" | "daily" | "never") => {
+export const item = (
+  path: string = "", 
+  lastmod: Date
+) => {
   return (
     `
     <url>
       <loc>${WebSite.Domain + path}</loc>
-      <changefreq>${changefreq}</changefreq>
-      <priority>1</priority>
+      <lastmod>${lastmod.toJSON()}</lastmod>
     </url>
     `
   )
 }
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
-  const items: string[] = [
-    item("", "daily")
-  ];
+  
 
   const db = new DataBase();
   await db.init();
 
-  const repo = db.getRepo(DataBase.Entities.Post);
-  const posts = await repo.find({}, {
-    orderBy: {
-      dateCreated: "DESC"
+  const posts = await db.em.aggregate(DataBase.Entities.Post, [
+    {
+      $addFields: {
+        date: {
+          $cond: [
+            "$dateUpdated",
+            "$dateUpdated",
+            "$dateCreated"
+          ]
+        }
+      }
+    },
+    {
+      $sort: {
+        date: -1,
+      }
+    },
+    {
+      $project: {
+        key: 1,
+        date: 1
+      }
     }
-  });
+  ]);
 
-  posts.forEach(p => {
+  const items: string[] = [
+    item("", new Date(posts[0].date))
+  ];
+
+  posts.forEach((p: Blog.Post & { date: string }) => {
     items.push(
-      item(Blog.Post.GetPostUrl(p), "never")
+      item(Blog.Post.GetPostUrl(p), new Date(p.date))
     )
   });
 
