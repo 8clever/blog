@@ -19,6 +19,7 @@ interface PageProps {
 interface PageQuery extends ParsedUrlQuery {
   page?: string;
   limit?: string;
+  q?: string;
 }
 
 export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = async (props) => {
@@ -29,8 +30,8 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
   const limit = Number(props.query.limit) || 10;
   const page = Number(props.query.page) || 1;
   const skip = limit * (page - 1);
-  
-  const [ raw ] = await db.em.aggregate(DataBase.Entities.Post, [
+
+  const query: any[] = [
     {
       $addFields: {
         date: {
@@ -80,7 +81,25 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
         ]
       } 
     }
-  ]);
+  ]
+
+  if (props.query.q) {
+    const textQuery = {
+      $regex: props.query.q,
+      $options: "i"
+    }
+    query.unshift({
+      $match: {
+        $or: [
+          { title: textQuery },
+          { description: textQuery },
+          { post: textQuery }
+        ]
+      }
+    })
+  }
+  
+  const [ raw ] = await db.em.aggregate(DataBase.Entities.Post, query);
 
   raw.data = raw.data.map((d: Blog.Post) => {
     const post = new DataBase.Entities.Post();
