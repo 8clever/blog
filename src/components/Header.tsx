@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Toolbar, Button, Typography, Link, AppBar, Box, Container, Avatar, Menu, MenuItem, ListItemIcon, ListItemText } from "@mui/material"
+import { Toolbar, Button, Typography, AppBar, Box, Container, Avatar, Menu, MenuItem, ListItemIcon, ListItemText } from "@mui/material"
 import { signIn, signOut, useSession } from "next-auth/react";
 import { WebSite } from './types';
 import { Add, Login, Logout } from '@mui/icons-material';
@@ -27,15 +27,14 @@ export default function Header(props: HeaderProps) {
               }}
             />
             <Typography
-              component="h2"
+              component="a"
+              href="/"
               variant="h5"
-              color="inherit"
+              color="primary"
               noWrap
-              sx={{ flex: 1 }}
+              sx={{ flex: 1, textDecoration: "none" }}
             > 
-              <Link href="/" underline='none'>
-                {WebSite.Name}
-              </Link>
+              {WebSite.Name}
             </Typography>
             {
               status === "authenticated" ?
