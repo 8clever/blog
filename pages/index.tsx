@@ -3,10 +3,12 @@ import { Pagination, Stack } from '@mui/material'
 import type { GetServerSideProps, NextPage } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { StructuredData } from 'src/components/StructuredData'
-import { DataBase } from '../server/connectors'
-import FeaturedPost from '../src/components/FeaturedPost'
-import { Layout, LayoutHeader } from '../src/components/Layout'
-import { Blog, WebSite } from '../src/components/types'
+import { DataBase } from 'server/connectors'
+import FeaturedPost from 'src/components/FeaturedPost'
+import { Layout, LayoutHeader } from 'src/components/Layout'
+import { Blog, WebSite } from 'src/components/types'
+import { useRouter } from "next/router"
+import qs from 'querystring';
 
 interface PageProps {
   featuredPosts: Blog.Post[];
@@ -118,6 +120,8 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
 }
 
 const Home: NextPage<PageProps> = (props) => {
+
+  const router = useRouter();
   
   return (
     <Layout
@@ -137,18 +141,6 @@ const Home: NextPage<PageProps> = (props) => {
           })
         }}
       />
-      <StructuredData 
-        thing={{
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "url": WebSite.Domain,
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": WebSite.Domain + "/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        }}
-      />
       <LayoutHeader>
         Breaking news
       </LayoutHeader>
@@ -160,7 +152,11 @@ const Home: NextPage<PageProps> = (props) => {
           count={props.totalPages}
           page={props.page}
           onChange={(e, page) => {
-            window.location.href = `/?page=${page}`
+            const query = {
+              ...router.query,
+              page
+            }
+            window.location.href = `/?${qs.stringify(query)}`;
           }}
         />
       </Stack>

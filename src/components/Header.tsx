@@ -1,9 +1,45 @@
 import * as React from 'react';
-import { Toolbar, Button, Typography, AppBar, Box, Container, Avatar, Menu, MenuItem, ListItemIcon, ListItemText } from "@mui/material"
+import { Toolbar, Button, Typography, AppBar, Box, Container, Avatar, Menu, MenuItem, ListItemIcon, ListItemText, InputAdornment, IconButton, Theme, SxProps, Input } from "@mui/material"
 import { signIn, signOut, useSession } from "next-auth/react";
 import { WebSite } from './types';
-import { Add, Login, Logout } from '@mui/icons-material';
+import { Add, Login, Logout, Search } from '@mui/icons-material';
 import { Image } from './Image';
+import { StructuredData } from './StructuredData';
+import { useRouter } from 'next/router';
+
+interface SearchInputProps {
+  sx?: SxProps<Theme>
+}
+
+const SearchInput = (props: SearchInputProps) => {
+  const router = useRouter();
+
+  return (
+    <Box 
+      sx={props.sx}
+      action='/'
+      component="form">
+      <Input 
+        size='small'
+        fullWidth
+        name="q"
+        defaultValue={router.query.q}
+        color='primary'
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              color="primary"
+              type='submit'
+              aria-label="search input">
+              <Search />
+            </IconButton>
+          </InputAdornment>
+        }
+      />
+    </Box>
+  )
+}
+
 interface HeaderProps {
 }
 
@@ -13,17 +49,28 @@ export default function Header(props: HeaderProps) {
   const [ menuAnchor, setMenuAnchor ] = React.useState<HTMLElement | null>(null);
 
   return (
-    <Box sx={{ mb: 3 }}>
-      <AppBar position='relative' color='transparent'>
+    <>
+      <StructuredData 
+        thing={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": WebSite.Domain,
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": WebSite.Domain + "/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }}
+      />
+      <AppBar position='relative' color='transparent' sx={{ mb: 3 }}>
         <Container maxWidth="md">
-          <Toolbar disableGutters>
+          <Toolbar sx={{ gap: 1 }} disableGutters>
             <Image
               src={"/mipmap-hdpi/ic_ttn.png"}
               alt={WebSite.Name}
               sx={{
                 height: 40,
-                width: 40,
-                mr: 1
+                width: 40
               }}
             />
             <Typography
@@ -36,6 +83,13 @@ export default function Header(props: HeaderProps) {
             > 
               {WebSite.Name}
             </Typography>
+            <SearchInput sx={{
+              display: {
+                width: 160,
+                xs: "none",
+                sm: "block"
+              }
+            }} />
             {
               status === "authenticated" ?
               <>
@@ -95,6 +149,17 @@ export default function Header(props: HeaderProps) {
           </Toolbar>
         </Container>
       </AppBar>
-    </Box>
+      <Container 
+        sx={{
+          mb: 3,
+          display: {
+            xs: "block",
+            sm: "none"
+          }
+        }}
+        maxWidth="md">
+        <SearchInput />
+      </Container>
+    </>
   );
 }
