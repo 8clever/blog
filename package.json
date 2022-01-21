@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.6",
     "cross-env": "^7.0.3",
+    "googleapis": "^92.0.0",
     "markdown-to-jsx": "^7.1.5",
     "next": "12.0.7",
     "next-auth": "^4.0.6",
