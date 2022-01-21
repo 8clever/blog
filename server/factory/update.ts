@@ -14,6 +14,8 @@ export class UpdateEndpoint<T> extends FactoryEndpoint {
 
   async validate (item: Awaited<T>) {}
 
+  async after (item: Awaited<T>) {}
+
   async main (req: NextApiRequest, res: NextApiResponse<any>) {
     const db = new DataBase();
     await db.init();
@@ -37,6 +39,8 @@ export class UpdateEndpoint<T> extends FactoryEndpoint {
     
     await this.validate(item);
     await db.orm.em.persistAndFlush(item);
+
+    this.after(item);
 
     return wrap(item).toJSON();
   }

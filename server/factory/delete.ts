@@ -11,6 +11,8 @@ export class DeleteEndpoint<T> extends FactoryEndpoint {
     super()
   }
 
+  async after (item: Awaited<T>) {}
+
   async main (req: NextApiRequest, res: NextApiResponse<any>) {
     const db = new DataBase();
     await db.init();
@@ -18,8 +20,9 @@ export class DeleteEndpoint<T> extends FactoryEndpoint {
     const item = await db.orm.em.findOne(this.entity, {
       _id: new ObjectId(dto.id)
     } as object);
-    if (item) {
-      await db.orm.em.removeAndFlush(item);
-    }
+    if (!item) return;
+
+    await db.orm.em.removeAndFlush(item);
+    this.after(item);
   }
 }

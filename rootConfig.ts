@@ -4,7 +4,8 @@ const {
   PORT = 3000,
   SECRET = "123456",
   NEXTAUTH_URL = "http://localhost:" + PORT,
-  UNSPLASH_ACCESS_TOKEN = ""
+  UNSPLASH_ACCESS_TOKEN = "",
+  NODE_ENV
 } = process.env;
 
 export const rootConfig = {
@@ -12,5 +13,6 @@ export const rootConfig = {
   PORT,
   SECRET,
   NEXTAUTH_URL,
-  UNSPLASH_ACCESS_TOKEN
+  UNSPLASH_ACCESS_TOKEN,
+  NODE_ENV
 }
