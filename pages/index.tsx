@@ -35,19 +35,8 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
 
   const query: any[] = [
     {
-      $addFields: {
-        date: {
-          $cond: [
-            "$dateUpdated",
-            "$dateUpdated",
-            "$dateCreated"
-          ]
-        }
-      }
-    },
-    {
       $sort: {
-        date: -1,
+        dateCreated: -1,
       }
     },
     {
