@@ -8,7 +8,7 @@ import Markdown from "src/components/Markdown";
 import { Blog, WebSite } from "src/components/types";
 import { useSession } from 'next-auth/react';
 import { Image } from "src/components/Image";
-import { PostTime } from "src/components/PostTime";
+import { DateTime } from "src/components/DateTime";
 import { StructuredData } from "src/components/StructuredData";
 
 interface PageProps {
@@ -84,7 +84,7 @@ const PostPage: NextPage<PageProps> = (props) => {
       }
       <Stack spacing={3}>
         <Typography variant="subtitle1" color="text.secondary" component="div">
-          <PostTime post={post} />
+          Published: <DateTime date={post.dateCreated} />
         </Typography>
         <Card>
           <Image 

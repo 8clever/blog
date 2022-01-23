@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Typography, Card, CardActionArea, CardContent } from "@mui/material"
 import { Blog } from './types';
 import { Image } from './Image';
-import { PostTime } from './PostTime';
+import { DateTime } from './DateTime';
 
 interface FeaturedPostProps {
   post: Blog.Post
@@ -31,7 +31,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
             component="time" 
             variant="subtitle1" 
             color="text.secondary">
-            <PostTime post={post} />
+            Published: <DateTime date={post.dateCreated} />
           </Typography>
           <Typography 
             sx={{

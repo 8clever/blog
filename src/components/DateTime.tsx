@@ -1,14 +1,11 @@
 import { NoSsr } from "@mui/material"
-import { Blog } from "./types"
 
 interface Props {
-  post: Blog.Post
+  date?: Date | number | string;
 }
 
-export const PostTime = (props: Props) => {
-  const { post } = props;
-
-  const date = new Date(post.dateUpdated || post.dateCreated || new Date());
+export const DateTime = (props: Props) => {
+  const date = new Date(props.date || new Date());
 
   return (
     <NoSsr defer fallback={<>&nbsp;</>}>
