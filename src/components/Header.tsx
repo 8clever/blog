@@ -1,18 +1,19 @@
 import * as React from 'react';
-import { Toolbar, Button, Typography, AppBar, Box, Container, Avatar, Menu, MenuItem, ListItemIcon, ListItemText, InputAdornment, IconButton, Theme, SxProps, Input, FormControl, InputLabel } from "@mui/material"
+import { Toolbar, Button, Typography, AppBar, Box, Avatar, Menu, MenuItem, ListItemIcon, ListItemText, InputAdornment, IconButton, Theme, SxProps, Input, FormControl, InputLabel } from "@mui/material"
 import { signIn, signOut, useSession } from "next-auth/react";
 import { WebSite } from './types';
 import { Add, Login, Logout, Search } from '@mui/icons-material';
 import { Image } from './Image';
 import { StructuredData } from './StructuredData';
 import { useRouter } from 'next/router';
+import { LayoutContainer } from './Layout';
 
 interface SearchInputProps {
   sx?: SxProps<Theme>
   id: string
 }
 
-const SearchInput = (props: SearchInputProps) => {
+export const SearchInput = (props: SearchInputProps) => {
   const router = useRouter();
 
   return (
@@ -73,8 +74,8 @@ export default function Header(props: HeaderProps) {
           }
         }}
       />
-      <AppBar position='relative' color='transparent' sx={{ mb: 3 }}>
-        <Container maxWidth="md">
+      <AppBar position='relative' color="transparent">
+        <LayoutContainer>
           <Toolbar sx={{ gap: 1 }} disableGutters>
             <Image
               src={"/mipmap-hdpi/ic_ttn.png"}
@@ -161,21 +162,9 @@ export default function Header(props: HeaderProps) {
               </Button>
             }
           </Toolbar>
-        </Container>
+        </LayoutContainer>
       </AppBar>
-      <Container 
-        sx={{
-          mb: 3,
-          display: {
-            xs: "block",
-            sm: "none"
-          }
-        }}
-        maxWidth="md">
-        <SearchInput 
-          id="mobile-search-input"
-        />
-      </Container>
+      
     </>
   );
 }

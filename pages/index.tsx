@@ -5,7 +5,7 @@ import { ParsedUrlQuery } from 'querystring'
 import { StructuredData } from 'src/components/StructuredData'
 import { DataBase } from 'server/connectors'
 import FeaturedPost from 'src/components/FeaturedPost'
-import { Layout, LayoutHeader } from 'src/components/Layout'
+import { Layout } from 'src/components/Layout'
 import { Blog, WebSite } from 'src/components/types'
 import { useRouter } from "next/router"
 import qs from 'querystring';
@@ -111,12 +111,16 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
 const Home: NextPage<PageProps> = (props) => {
 
   const router = useRouter();
+
+  const title = WebSite.Name + ", breaking news, trend news, popular news, global news";
+
+  const description = WebSite.Name + " is a network about all trend news in the world. Games, popular trends, inside information. All what you want in one place."
   
   return (
     <Layout
       image={props.featuredPosts[0]?.image.url}
-      description={WebSite.Name + " is a network about all trend news in the world. Games, popular trends, inside information. All what you want in one place."}
-      title={WebSite.Name + ", breaking news, trend news, popular news, global news"}>
+      description={description}
+      title={title}>
       <StructuredData 
         thing={{
           "@context":"https://schema.org",
@@ -130,9 +134,6 @@ const Home: NextPage<PageProps> = (props) => {
           })
         }}
       />
-      <LayoutHeader>
-        Breaking news
-      </LayoutHeader>
       <Stack spacing={3}>
         {props.featuredPosts.map((post, idx) => (
           <FeaturedPost key={idx} post={post} preload={idx === 0} />

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Container, Stack, Box, Typography } from "@mui/material"
-import Header from './Header';
+import { Container, Stack, Box, Typography, SxProps, Theme } from "@mui/material"
+import Header, { SearchInput } from './Header';
 import Footer from './Footer';
 import Head from 'next/head';
 import { lazy, LazyHydrate } from './LazyHydrate';
@@ -8,18 +8,36 @@ import { useRouter } from 'next/router';
 import { WebSite } from './types';
 
 interface LayoutHeaderProps {
+  sx?: SxProps<Theme>
 }
 
 export const LayoutHeader: React.FC<LayoutHeaderProps> = function LayoutHeader (props) {
   return (
     <Typography
       component="h1" 
-      variant="h3" 
-      sx={{ mb: 3 }}>
+      variant="h4" 
+      sx={{ 
+        fontWeight: "bold",
+        mb: 3,
+        ...props.sx 
+      }}>
       {props.children}
     </Typography>
   )
 }
+
+interface LayoutContainer {
+  sx?: SxProps<Theme>
+}
+
+export const LayoutContainer: React.FC<LayoutContainer> = function LayoutContainer (props) {
+  return (
+    <Container maxWidth="md" sx={props.sx}>{props.children}</Container>
+  )
+}
+
+const shapeStyles = { bgcolor: 'primary.contrastText', width: 5, height: 5 };
+const rectangle = <Box component="span" sx={shapeStyles} />;
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -94,14 +112,56 @@ export function Layout(props: LayoutProps) {
           }
         </Head>
         <Stack justifyContent={"space-between"} sx={{ height: "100vh" }}>
-          <Box sx={{ mb: 5 }}>
+          <Box>
             <LazyHydrate>
               <Header />
             </LazyHydrate>
             <LazyHydrate>
-              <Container maxWidth={"md"}>
-                {props.children}
-              </Container>
+              <>
+                { props.title && props.description ?
+                  <Box sx={{ 
+                    px: {
+                      xs: 2,
+                      sm: 10,
+                      md: 20,
+                      lg: 30
+                    },
+                    py: {
+                      xs: 15,
+                      sm: 20
+                    },
+                    textAlign: "center",
+                    bgcolor: "primary.dark", 
+                    mb: 3
+                  }}>
+                    <LayoutHeader sx={{ color: "secondary.contrastText" }}>
+                      {props.title}
+                    </LayoutHeader>
+                    <Stack direction={"row"} spacing={3} justifyContent="center" sx={{ mb: 2 }}>
+                      {rectangle}
+                    </Stack>
+                    <Typography component="p" color="secondary.contrastText">
+                      {props.description}
+                    </Typography>
+                  </Box> : 
+                  <Box sx={{ mb: 3 }} />
+                }
+                <LayoutContainer 
+                  sx={{
+                    mb: 3,
+                    display: {
+                      xs: "block",
+                      sm: "none"
+                    }
+                  }}>
+                  <SearchInput 
+                    id="mobile-search-input"
+                  />
+                </LayoutContainer>
+                <LayoutContainer sx={{ mb: 5 }}>
+                  {props.children}
+                </LayoutContainer>
+              </>
             </LazyHydrate>
           </Box>
           <LazyHydrate>

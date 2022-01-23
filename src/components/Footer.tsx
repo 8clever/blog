@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Box, Container, Typography, Link, Stack, Fab } from "@mui/material"
 import { Twitter as TwitterIcon } from "@mui/icons-material"
-import { darken } from "@mui/system/colorManipulator";
 import { theme } from './theme';
 import { WebSite } from './types';
 
@@ -30,11 +29,9 @@ const pages = [
   { name: "Privacy Policy", url: "/privacypolicy" }
 ]
 
-const footerBackground = darken(theme.palette.secondary.main, 0.5);
-
 export default function Footer() {
   return (
-    <Box component="footer" sx={{ background: footerBackground }}>
+    <Box component="footer" sx={{ bgcolor: "secondary.dark" }}>
       <Container maxWidth="xs" sx={{ p: 5 }}>
         <Stack spacing={5}>
           <Stack direction="row" spacing={5} justifyContent="center" flexWrap="wrap">

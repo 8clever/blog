@@ -1,11 +1,10 @@
-import { Layout, LayoutHeader } from "src/components/Layout";
+import { Layout } from "src/components/Layout";
 
 const title = "Privacy Policy for Take Top News";
 
 function PrivacyPolicy () {
   return (
     <Layout title={title} description={title}>
-      <LayoutHeader>{title}</LayoutHeader>
       <p>At Take Top News, accessible from https://taketopnews.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Take Top News and how we use it.</p>
 
       <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
