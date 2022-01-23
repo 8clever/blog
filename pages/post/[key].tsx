@@ -89,7 +89,6 @@ const PostPage: NextPage<PageProps> = (props) => {
           <Image 
             src={post.image.url} 
             alt={post.image.label} 
-            preload 
           />
         </Card>
         <Markdown className="markdown">

@@ -136,7 +136,7 @@ const Home: NextPage<PageProps> = (props) => {
       />
       <Stack spacing={3}>
         {props.featuredPosts.map((post, idx) => (
-          <FeaturedPost key={idx} post={post} preload={idx === 0} />
+          <FeaturedPost key={idx} post={post} />
         ))}
         <Pagination 
           count={props.totalPages}
