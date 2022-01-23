@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Toolbar, Button, Typography, AppBar, Box, Container, Avatar, Menu, MenuItem, ListItemIcon, ListItemText, InputAdornment, IconButton, Theme, SxProps, Input } from "@mui/material"
+import { Toolbar, Button, Typography, AppBar, Box, Container, Avatar, Menu, MenuItem, ListItemIcon, ListItemText, InputAdornment, IconButton, Theme, SxProps, Input, FormControl, InputLabel } from "@mui/material"
 import { signIn, signOut, useSession } from "next-auth/react";
 import { WebSite } from './types';
 import { Add, Login, Logout, Search } from '@mui/icons-material';
@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 
 interface SearchInputProps {
   sx?: SxProps<Theme>
+  id: string
 }
 
 const SearchInput = (props: SearchInputProps) => {
@@ -19,23 +20,33 @@ const SearchInput = (props: SearchInputProps) => {
       sx={props.sx}
       action='/'
       component="form">
-      <Input 
-        size='small'
-        fullWidth
-        name="q"
-        defaultValue={router.query.q}
-        color='primary'
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton
-              color="primary"
-              type='submit'
-              aria-label="search input">
-              <Search />
-            </IconButton>
-          </InputAdornment>
-        }
-      />
+      <FormControl 
+        sx={{
+          mb: 1
+        }}
+        variant='standard' 
+        color="primary"
+        fullWidth>
+        <InputLabel 
+          htmlFor={props.id}>
+          Search
+        </InputLabel>
+        <Input 
+          id={props.id}
+          name="q"
+          defaultValue={router.query.q}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                color="primary"
+                type='submit'
+                aria-label="search input">
+                <Search />
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
     </Box>
   )
 }
@@ -83,13 +94,16 @@ export default function Header(props: HeaderProps) {
             > 
               {WebSite.Name}
             </Typography>
-            <SearchInput sx={{
-              display: {
-                width: 160,
-                xs: "none",
-                sm: "block"
-              }
-            }} />
+            <SearchInput 
+              id='desktop-search-input'
+              sx={{
+                display: {
+                  width: 160,
+                  xs: "none",
+                  sm: "block"
+                }
+              }} 
+            />
             {
               status === "authenticated" ?
               <>
@@ -158,7 +172,9 @@ export default function Header(props: HeaderProps) {
           }
         }}
         maxWidth="md">
-        <SearchInput />
+        <SearchInput 
+          id="mobile-search-input"
+        />
       </Container>
     </>
   );
