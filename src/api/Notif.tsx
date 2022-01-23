@@ -10,7 +10,7 @@ export class Notif {
 
     $snack = document.createElement("div");
     $snack.id = id;
-    document.body.prepend($snack);
+    document.body.appendChild($snack);
     return $snack;
   }
 
