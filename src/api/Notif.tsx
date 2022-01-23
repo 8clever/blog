@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 export class Notif {
 
-  private static GetEl () {
+  private static get $el () {
     const id = "notif";
     let $snack = document.getElementById(id);
     if ($snack) return $snack
@@ -30,10 +30,10 @@ export class Notif {
         }}>
         <Alert severity={options.type || "error"}>{options.message}</Alert>
       </Snackbar>,
-      this.GetEl(),
+      this.$el,
       () => {
         if (visible) return;
-        this.GetEl().remove();
+        this.$el.remove();
       }
     )
   }
