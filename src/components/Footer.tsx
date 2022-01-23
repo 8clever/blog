@@ -32,7 +32,7 @@ const pages = [
 export default function Footer() {
   return (
     <Box component="footer" sx={{ bgcolor: "secondary.dark" }}>
-      <Container maxWidth="xs" sx={{ p: 5 }}>
+      <Container maxWidth="xs" sx={{ px: 5, py: 10 }}>
         <Stack spacing={5}>
           <Stack direction="row" spacing={5} justifyContent="center" flexWrap="wrap">
             {pages.map(p => {
