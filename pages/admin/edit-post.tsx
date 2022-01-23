@@ -107,16 +107,20 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
             </DialogActions>
           </Dialog>
         </Stack>
-        <TextField 
+        <TextField
           variant="standard"
           required
           fullWidth
           label="Key"
           value={post.key}
           onChange={e => {
+            const key = (e.target.value)
+              .trim()
+              .toLowerCase()
+              .replace(/[^\w-_]/, "");
             setPost({
               ...post,
-              key: e.target.value
+              key
             })
           }}
         />
