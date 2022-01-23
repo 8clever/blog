@@ -134,10 +134,10 @@ export function Layout(props: LayoutProps) {
                     bgcolor: "primary.dark", 
                     mb: 3
                   }}>
-                    <LayoutHeader sx={{ color: "secondary.contrastText" }}>
+                    <LayoutHeader sx={{ color: "secondary.contrastText", m: 0 }}>
                       {props.title}
                     </LayoutHeader>
-                    <Stack direction={"row"} spacing={3} justifyContent="center" sx={{ mb: 2 }}>
+                    <Stack direction={"row"} spacing={3} justifyContent="center" sx={{ my: 3 }}>
                       {rectangle}
                     </Stack>
                     <Typography component="p" color="secondary.contrastText">
