@@ -62,6 +62,11 @@ const EditFeaturedPost: NextPage<PageProps> = (props) => {
             variant="contained"
             onClick={async () => {
               await Blog.Post.Save(post);
+              const Notif = (await import("src/api/Notif")).default;
+              Notif.Show({
+                message: "Success update",
+                type: "success"
+              });
               if (post.id) return;
               window.location.href = "/admin/edit-post?key=" + post.key
             }}

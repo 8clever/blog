@@ -1,7 +1,3 @@
-import ReactDOM from "react-dom";
-import { Alert, Slide, Snackbar } from '@mui/material'
-
-
 export class Api {
 
   constructor (
@@ -20,40 +16,13 @@ export class Api {
       return json;
     }
 
-    Api.Notif(true, json.errors[0]);
+    const Notif = (await import("./Notif")).default;
+
+    Notif.Show({
+      message: json.errors[0]
+    })
 
     throw new Error(json.errors[0]);
-  }
-
-  public static Notif = (visible: boolean, message: string) => {
-    ReactDOM.render(
-      <Snackbar 
-        TransitionComponent={props => <Slide 
-          {...props} 
-          direction="left" />
-        }
-        open={visible}
-        onClose={() => this.Notif(false, message)}
-        autoHideDuration={6000}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: 'right'
-        }}>
-        <Alert severity="error">{message}</Alert>
-      </Snackbar>,
-      this.getSnackEl()
-    )
-  }
-
-  private static getSnackEl = () => {
-    const id = "notif";
-    let $snack = document.getElementById(id);
-    if ($snack) return $snack
-
-    $snack = document.createElement("div");
-    $snack.id = id;
-    document.body.appendChild($snack);
-    return $snack;
   }
 }
 

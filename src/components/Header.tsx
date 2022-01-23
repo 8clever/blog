@@ -22,7 +22,7 @@ const SearchInput = (props: SearchInputProps) => {
       component="form">
       <FormControl 
         sx={{
-          mb: 1
+          mb: "12px"
         }}
         variant='standard' 
         color="primary"

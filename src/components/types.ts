@@ -1,5 +1,3 @@
-import { Api } from "../api";
-
 export namespace Blog {
   export class Image {
     url: string = "https://source.unsplash.com/random";
@@ -23,11 +21,13 @@ export namespace Blog {
     }
 
     public static Save = async (post: Post) => {
+      const Api = (await import("src/api")).Api;
       const api = new Api("/api/secure/post/update");
       await api.post(post);
     }
 
     public static Delete = async (post: Post) => {
+      const Api = (await import("src/api")).Api;
       const api = new Api("/api/secure/post/delete");
       await api.post(post);
     }
