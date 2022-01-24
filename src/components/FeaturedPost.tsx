@@ -54,7 +54,6 @@ export default function FeaturedPost(props: FeaturedPostProps) {
               sm: "200px"
             },
             height: {
-              xs: "150px",
               sm: "100%"
             }
           }}

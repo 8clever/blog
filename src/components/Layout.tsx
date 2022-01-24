@@ -128,7 +128,7 @@ export function Layout(props: LayoutProps) {
                     },
                     py: {
                       xs: 15,
-                      sm: 20
+                      md: 20
                     },
                     textAlign: "center",
                     bgcolor: "primary.dark", 

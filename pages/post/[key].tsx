@@ -87,6 +87,9 @@ const PostPage: NextPage<PageProps> = (props) => {
         </Typography>
         <Card>
           <Image 
+            sx={{
+              height: null
+            }}
             src={post.image.url} 
             alt={post.image.label} 
           />
