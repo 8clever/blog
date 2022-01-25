@@ -112,7 +112,7 @@ const Home: NextPage<PageProps> = (props) => {
 
   const router = useRouter();
 
-  const title = WebSite.Name + ", breaking news, trend news, popular news, global news";
+  const title = WebSite.Name + ", top news for the week, top news usa today, breaking news";
 
   const description = WebSite.Name + " is a network about all trend news in the world. Games, popular trends, inside information. All what you want in one place."
   
