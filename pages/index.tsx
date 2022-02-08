@@ -118,6 +118,7 @@ const Home: NextPage<PageProps> = (props) => {
   
   return (
     <Layout
+      ad
       image={props.featuredPosts[0]?.image.url}
       description={description}
       title={title}>
